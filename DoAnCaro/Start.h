@@ -1,14 +1,16 @@
 #pragma once
+#include "mainMenu.h"
+#include "Play.h"
 #include <iostream>
 #include <CertView.h>
 #include <conio.h>
 #include <Windows.h>
-#include <signal.h>
-#define SIZE_BOARD 12
+#include <random>
+#include <time.h>
+
 
 using namespace std;
 
 void gotoXY(int, int);
-void Menu();
 void FixConsoleWindow();
-
+void Start();
