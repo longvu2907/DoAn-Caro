@@ -45,17 +45,39 @@ void Play(int& k1, int& k2,int & set, int mode)
 			{
 				k1++;
 				Sleep(1000);
+				FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
 				if (k1 == mode)
 				{
 					system("cls");
-					cout << "PLAYER X WIN !!!!\n";
-					cout << "PRESS ENTER TO QUIT GAME\n";
-					cout << "PRESS ESC BACK MAINMENU\n";
+					gotoXY(47, 3);
+					cout << "PLAYER X WIN !!!!";
+					gotoXY(47, 6); cout << "MAIN MENU";
+
+					gotoXY(47, 7); cout << "QUIT GAME";
+
 					while (1)
 					{
-						value = _getch();
-						if (value == 13) exit(0);
-						else if (value == 27) Start();
+						gotoXY(x, y);
+						k = _getch();
+						value = k;
+						switch (value)
+						{
+						case -32:
+							value = _getch();
+							if (value == 72)
+							{
+								if (y > 6) { y--; gotoXY(x, y); } break;
+							}
+							else if (value == 80)
+							{
+								if (y < 8) { y++; gotoXY(x, y); } break;
+							}
+							break;
+						case 13:
+							if (y == 6) Start();
+							else if (y == 7) NewGame(0, 0, 1);
+							else if (y == 8) exit(0);
+						}
 					}
 				}
 				
@@ -68,20 +90,40 @@ void Play(int& k1, int& k2,int & set, int mode)
 			{
 				k2++;
 				Sleep(1000);
+				FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
 				if (k2 == mode)
 				{
 					system("cls");
-					gotoXY(47, 5);
-					cout << "PLAYER O WIN !!!!\n";
-					gotoXY(47, 6);
-					cout << "PRESS ENTER TO QUIT GAME\n";
-					gotoXY(47, 7);
-					cout << "PRESS ESC BACK MAIN MENU\n";
+					gotoXY(47, 3);
+					cout << "PLAYER O WIN !!!!";
+					gotoXY(47, 6); cout << "MAIN MENU";
+					gotoXY(47, 7); cout << "PLAY AGAIN";
+					gotoXY(47, 8); cout << "QUIT GAME";
+					x = 47;
+					y = 6;
 					while (1)
 					{
-						value = _getch();
-						if (value == 13) exit(0);
-						else if (value == 27) Start();
+						gotoXY(x, y);
+						k = _getch();
+						value = k;
+						switch (value)
+						{
+						case -32:
+							value = _getch();
+							if (value == 72)
+							{
+								if (y > 6) { y--; gotoXY(x, y); } break;
+							}
+							else if (value == 80)
+							{
+								if (y < 8) { y++; gotoXY(x, y); } break;
+							}
+							break;
+						case 13:
+							if (y == 6) Start();
+							else if (y == 7) NewGame(0, 0, 1);
+							else if (y == 8) exit(0);
+						}
 					}
 				}
 				

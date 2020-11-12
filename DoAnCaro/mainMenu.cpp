@@ -8,10 +8,11 @@ void mainMenu()
 {
 	int x(51), y(7);
 
-	gotoXY(x, y); cout << "NEW GAME";
-	gotoXY(x, y + 1); cout << "LOAD GAME";
-	gotoXY(x, y + 2); cout << "ABOUT";
-	gotoXY(x, y + 3); cout << "EXIT";
+	gotoXY(x, y); cout << "PLAYER VS PLAYER";
+	gotoXY(x, y + 1); cout << "PLAYER VS BOT";
+	gotoXY(x, y + 2); cout << "LOAD GAME";
+	gotoXY(x, y + 3); cout << "ABOUT";
+	gotoXY(x, y + 4); cout << "EXIT";
 
 	gotoXY(x, y);
 	while (1)
@@ -38,15 +39,15 @@ void mainMenu()
 				NewGame(k1, k2, set);
 				break;
 			}
-			else if (y == 8)
+			else if (y == 8||y == 9)
 			{
 				LoadGame();
 			}
-			else if (y == 9)
+			else if (y == 10)
 			{
 				About();
 			}
-			else if (y == 10)
+			else if (y == 11)
 			{
 				system("cls");
 				exit(0);

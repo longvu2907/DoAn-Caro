@@ -5,8 +5,7 @@ void DrawBoard(int k1, int k2, int set)
 	system("cls");
 	gotoXY(51, 7); 
 	cout << "SET " << set;
-	Sleep(2000);
-	FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
+	Sleep(1000);
 	system("cls");
 	//Top Line
 	gotoXY(3, 3); cout << char(201);
@@ -17,21 +16,6 @@ void DrawBoard(int k1, int k2, int set)
 		{
 			cout << char(203);
 			Sleep(10);
-			/*for (int j(4); j <= 27; j++)
-			{
-				if (j % 2 != 0) 
-				{
-					gotoXY(i - 1, j);
-					cout << char(206);
-					Sleep(10);
-				}
-				else
-				{
-					gotoXY(i - 1, j);
-					cout << char(186);
-					Sleep(10);
-				}
-			}*/
 		}
 		else cout << char(205);
 	}
@@ -110,4 +94,5 @@ void DrawBoard(int k1, int k2, int set)
 		}
 	}
 	gotoXY(25, 2); cout << k1 << " - " << k2;
+	FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
 }

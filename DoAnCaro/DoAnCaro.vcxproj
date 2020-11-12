@@ -150,8 +150,15 @@
     <ClInclude Include="Board.h" />
     <ClInclude Include="checkTurn.h" />
     <ClInclude Include="Play.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Start.h" />
     <ClInclude Include="mainMenu.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="DoAnCaro.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\..\Onedrive - Personal\OneDrive\Pictures\caro_Mks_icon.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
