@@ -1,10 +1,9 @@
 #include "Start.h"
 
-void Play()
+void Play(int& x, int& y)
 {
 	char k;
 	int value;
-	int x(5), y(4);
 	gotoXY(x, y); 
 	while (1)
 	{
@@ -39,5 +38,4 @@ void Play()
 			gotoXY(x, y);
 		}
 	}
-
 }

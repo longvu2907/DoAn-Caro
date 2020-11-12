@@ -3,4 +3,4 @@
 #include "mainMenu.h"
 #include "Start.h"
 
-void Play();
+void Play(int&, int&);
