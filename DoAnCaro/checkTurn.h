@@ -1,4 +1,5 @@
 #pragma once
 #include "Start.h"
 
-int Turn();
+int initTurn();
+int swapTurn(int);

@@ -1,9 +1,15 @@
 #include "checkTurn.h"
 
-int Turn()
+int initTurn()
 {
-	int turn;
+	unsigned int initTurn;
 	srand(time(NULL));
-	turn = rand() % 2 + 1;
-	return 0;
+	initTurn = rand() % 2 + 1;
+	return initTurn;
+}
+int swapTurn(int turn)
+{
+	if (turn == 1) turn = 2;
+	else turn = 1;
+	return turn;
 }

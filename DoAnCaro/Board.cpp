@@ -1,6 +1,6 @@
 #include "Board.h"
 
-void DrawBoard()
+void DrawBoard(int k1, int k2)
 {	
 	//Top Line
 	gotoXY(3, 3); cout << char(201);
@@ -103,28 +103,5 @@ void DrawBoard()
 			}
 		}
 	}
-	
-
-
-	//gotoXY(8, 3);
-	//for (int i(1); i <= 43;i++)
-	//{
-	//	if (i % 4 == 0) cout << char(203);
-	//	else cout << char(205);
-	//}
-	//gotoXY(51, 3); cout << char(187);
-	//for (int i(4); i <= 26; i++)
-	//{
-	//	if (i % 2 != 0)
-	//	{
-	//		gotoXY(47,i);
-	//		cout << char(206);
-	//	}
-	//	else
-	//	{
-	//		gotoXY(47, i);
-	//		cout << char(186);
-	//	}
-	//}
-	//gotoXY(47, 3);
+	gotoXY(25, 2); cout << k1 << " - " << k2;
 }

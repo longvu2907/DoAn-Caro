@@ -54,11 +54,14 @@ void mainMenu()
 	}
 }
 
+int k1(0), k2(0);
+
 void NewGame()
 {
 	system("cls");
-	DrawBoard();
-	Play();
+	DrawBoard(k1,k2);
+	resetBoard();
+	Play(k1,k2);
 }
 void LoadGame()
 {
