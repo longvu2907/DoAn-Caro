@@ -5,7 +5,7 @@ void DrawBoard(int k1, int k2, int set)
 	system("cls");
 	gotoXY(51, 7); 
 	cout << "SET " << set;
-	Sleep(1000);
+	Sleep(500);
 	system("cls");
 	//Top Line
 	gotoXY(3, 3); cout << char(201);
@@ -94,5 +94,6 @@ void DrawBoard(int k1, int k2, int set)
 		}
 	}
 	gotoXY(25, 2); cout << k1 << " - " << k2;
+	gotoXY(3, 2); cout << "Turn: ";
 	FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
 }

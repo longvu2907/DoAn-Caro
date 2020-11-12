@@ -3,6 +3,7 @@
 
 char k;
 int value;
+char name1, name2;
 
 void mainMenu()
 {
@@ -61,9 +62,11 @@ void NewGame(int k1, int k2 ,int set)
 {
 	int mode;
 	mode = Mode();
-	DrawBoard(k1,k2,set);
+	int turn(initTurn());
+	init(turn);
+	DrawBoard(k1, k2, set);
 	resetBoard();
-	Play(k1, k2, set, mode);
+	Play(k1, k2, set, mode,turn);
 }
 void LoadGame()
 {

@@ -2,15 +2,15 @@
 
 int a[60][60] = {};
 
-void Play(int& k1, int& k2,int & set, int mode)
+void Play(int& k1, int& k2,int & set, int mode,int turn)
 {
 	char k;
 	int value;
 	int x(5), y(4);
-	int turn(initTurn());
 	gotoXY(x, y); 
 	while (1)
 	{
+		oTurn(x,y,turn);
 		k = _getch();
 		value = k;
 		if (value == -32)
@@ -40,7 +40,6 @@ void Play(int& k1, int& k2,int & set, int mode)
 		{
 			tickXO(x, y, turn);
 			gotoXY(x, y);
-			turn = swapTurn(turn);
 			if (checkXO()==1)
 			{
 				k1++;
@@ -52,9 +51,10 @@ void Play(int& k1, int& k2,int & set, int mode)
 					gotoXY(47, 3);
 					cout << "PLAYER X WIN !!!!";
 					gotoXY(47, 6); cout << "MAIN MENU";
-
-					gotoXY(47, 7); cout << "QUIT GAME";
-
+					gotoXY(47, 7); cout << "PLAY AGAIN";
+					gotoXY(47, 8); cout << "QUIT GAME";
+					x = 47;
+					y = 6;
 					while (1)
 					{
 						gotoXY(x, y);
@@ -84,7 +84,7 @@ void Play(int& k1, int& k2,int & set, int mode)
 				set++;
 				DrawBoard(k1, k2, set);
 				resetBoard();
-				Play(k1, k2, set, mode);
+				Play(k1, k2, set, mode,turn);
 			}
 			else if (checkXO() == 2)
 			{
@@ -130,12 +130,12 @@ void Play(int& k1, int& k2,int & set, int mode)
 				set++;
 				DrawBoard(k1, k2, set);
 				resetBoard();
-				Play(k1, k2, set, mode);
+				Play(k1, k2, set, mode,turn);
 			}
 		}
 	}
 }
-void tickXO(int x, int y, int turn)
+void tickXO(int x, int y, int& turn)
 {
 
 	if (a[x][y] == 1 || a[x][y] == 2) return;
@@ -143,11 +143,13 @@ void tickXO(int x, int y, int turn)
 	{
 		a[x][y] = 1;
 		cout << "X";
+		turn = swapTurn(turn);
 	}
 	else if (turn== 2)
 	{
 		a[x][y] = 2;
 		cout << "O";
+		turn = swapTurn(turn);
 	}
 	
 }
@@ -181,4 +183,29 @@ void resetBoard()
 			a[i][j] = 0;
 		}
 	}
+}
+void init(int turn)
+{
+	string first;
+	system("cls");
+	gotoXY(46, 8); cout << "Initializing ";
+	for (int i(1); i <= 5;i++)
+	{
+		gotoXY(58, 8);
+		for (int i(1); i <= 5; i++)
+		{
+			cout << ".";
+			Sleep(100);
+		}
+		gotoXY(58, 8);
+		for (int i(1); i <= 5; i++)
+		{
+			cout << " ";
+		}
+	}
+	system("cls");
+	if (initTurn() == 1) first = "X";
+	else if (initTurn() == 2) first = "O";
+	gotoXY(46, 8); cout << "PLAYER " << first << " GO FIRST";
+	Sleep(2000);
 }

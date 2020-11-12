@@ -7,6 +7,7 @@
 #include <Windows.h>
 #include <random>
 #include <time.h>
+#include <string>
 
 
 using namespace std;
