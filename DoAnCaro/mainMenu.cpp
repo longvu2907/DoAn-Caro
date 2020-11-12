@@ -12,7 +12,7 @@ void mainMenu()
 	gotoXY(x, y + 1); cout << "LOAD GAME";
 	gotoXY(x, y + 2); cout << "ABOUT";
 	gotoXY(x, y + 3); cout << "EXIT";
-	
+
 	gotoXY(x, y);
 	while (1)
 	{
@@ -28,13 +28,14 @@ void mainMenu()
 			}
 			else if (value == 80)
 			{
-				if (y < 10) { y++; gotoXY(x, y); } break;
+				if (y < 11) { y++; gotoXY(x, y); } break;
 			}
 			break;
 		case 13:
 			if (y == 7)
 			{
-				NewGame();
+				int k1(0), k2(0), set(1);
+				NewGame(k1, k2, set);
 				break;
 			}
 			else if (y == 8)
@@ -54,14 +55,14 @@ void mainMenu()
 	}
 }
 
-int k1(0), k2(0);
 
-void NewGame()
+void NewGame(int k1, int k2 ,int set)
 {
-	system("cls");
-	DrawBoard(k1,k2);
+	int mode;
+	mode = Mode();
+	DrawBoard(k1,k2,set);
 	resetBoard();
-	Play(k1,k2);
+	Play(k1, k2, set, mode);
 }
 void LoadGame()
 {
@@ -95,7 +96,7 @@ void LoadGame()
 			system("cls");
 			gotoXY(48, 15);
 			cout << "Tinh nang dang phat trien.";
-			gotoXY(0, 30);
+			Sleep(2000);
 			exit(0);
 		}
 	}
@@ -126,4 +127,36 @@ void About()
 		}
 	}
 }
-
+int Mode()
+{
+	int mode;
+	system("cls");
+	gotoXY(54, 8); cout << "BO1\n";
+	gotoXY(54, 9); cout << "BO3\n";
+	gotoXY(54, 10); cout << "BO5\n";
+	int x(54), y(8);
+	gotoXY(x, y);
+	while (1)
+	{
+		k = _getch();
+		value = k;
+		switch (value)
+		{
+		case -32:
+			value = _getch();
+			if (value == 72)
+			{
+				if (y > 8) { y--; gotoXY(x, y); } break;
+			}
+			else if (value == 80)
+			{
+				if (y < 10) { y++; gotoXY(x, y); } break;
+			}
+			break;
+		case 13:
+			if (y == 8) return 1; 
+			else if (y == 9) return 3; 
+			else if (y == 10) return 5;
+		}
+	}
+}

@@ -1,7 +1,13 @@
 #include "Board.h"
 
-void DrawBoard(int k1, int k2)
+void DrawBoard(int k1, int k2, int set)
 {	
+	system("cls");
+	gotoXY(51, 7); 
+	cout << "SET " << set;
+	Sleep(2000);
+	FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
+	system("cls");
 	//Top Line
 	gotoXY(3, 3); cout << char(201);
 	Sleep(10);

@@ -3,9 +3,10 @@
 #include "Board.h"
 
 void mainMenu();
-void NewGame();
+void NewGame(int,int,int);
 void LoadGame();
 void About();
+int Mode();
 
 
 

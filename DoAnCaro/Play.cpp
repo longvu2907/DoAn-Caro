@@ -2,7 +2,7 @@
 
 int a[60][60] = {};
 
-void Play(int& k1, int& k2)
+void Play(int& k1, int& k2,int & set, int mode)
 {
 	char k;
 	int value;
@@ -44,24 +44,51 @@ void Play(int& k1, int& k2)
 			if (checkXO()==1)
 			{
 				k1++;
-				if (k1 == 3)
+				Sleep(1000);
+				if (k1 == mode)
 				{
 					system("cls");
-					cout << "NGUOI CHOI 1 CHIEN THANG";
-					system("pause");
+					cout << "PLAYER X WIN !!!!\n";
+					cout << "PRESS ENTER TO QUIT GAME\n";
+					cout << "PRESS ESC BACK MAINMENU\n";
+					while (1)
+					{
+						value = _getch();
+						if (value == 13) exit(0);
+						else if (value == 27) Start();
+					}
 				}
-				NewGame();
+				
+				set++;
+				DrawBoard(k1, k2, set);
+				resetBoard();
+				Play(k1, k2, set, mode);
 			}
 			else if (checkXO() == 2)
 			{
 				k2++;
-				if (k2 == 3)
+				Sleep(1000);
+				if (k2 == mode)
 				{
 					system("cls");
-					cout << "NGUOI CHOI 1 CHIEN THANG";
-					system("pause");
+					gotoXY(47, 5);
+					cout << "PLAYER O WIN !!!!\n";
+					gotoXY(47, 6);
+					cout << "PRESS ENTER TO QUIT GAME\n";
+					gotoXY(47, 7);
+					cout << "PRESS ESC BACK MAIN MENU\n";
+					while (1)
+					{
+						value = _getch();
+						if (value == 13) exit(0);
+						else if (value == 27) Start();
+					}
 				}
-				NewGame();
+				
+				set++;
+				DrawBoard(k1, k2, set);
+				resetBoard();
+				Play(k1, k2, set, mode);
 			}
 		}
 	}

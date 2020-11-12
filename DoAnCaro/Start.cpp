@@ -21,6 +21,7 @@ void gotoXY(int x, int y)
 }
 void Start()
 {
+	system("cls");
 	FixConsoleWindow();
 	mainMenu();
 }
