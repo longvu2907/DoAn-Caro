@@ -40,10 +40,9 @@ void Play(int& k1, int& k2,int & set, int mode,int turn)
 		{
 			tickXO(x, y, turn);
 			gotoXY(x, y);
-			if (checkXO()==1)
+			if (checkXO() == 1)
 			{
 				k1++;
-				Sleep(1000);
 				FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
 				if (k1 == mode)
 				{
@@ -89,7 +88,6 @@ void Play(int& k1, int& k2,int & set, int mode,int turn)
 			else if (checkXO() == 2)
 			{
 				k2++;
-				Sleep(1000);
 				FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
 				if (k2 == mode)
 				{
@@ -160,14 +158,174 @@ int checkXO()
 	{
 		for (int j(4); j <= 26; j += 2)
 		{
-			if (a[i][j] == 1 && a[i + 4][j] == 1 && a[i + 8][j] == 1 && a[i + 12][j] == 1 && a[i + 16][j] == 1) return 1;
-			else if (a[i][j] == 1 && a[i][j + 2] == 1 && a[i][j + 4] == 1 && a[i][j + 6] == 1 && a[i][j + 8] == 1) return 1;
-			else if (a[i][j] == 1 && a[i + 4][j + 2] == 1 && a[i + 8][j + 4] == 1 && a[i + 12][j + 6] == 1 && a[i + 16][j + 8] == 1) return 1;
-			else if (a[i][j] == 1 && a[i + 4][j - 2] == 1 && a[i + 8][j - 4] == 1 && a[i + 12][j - 6] == 1 && a[i + 16][j - 8] == 1) return 1;
-			if (a[i][j] == 2 && a[i + 4][j] == 2 && a[i + 8][j] == 2 && a[i + 12][j] == 2 && a[i + 16][j] == 2) return 2;
-			else if (a[i][j] == 2 && a[i][j + 2] == 2 && a[i][j + 4] == 2  && a[i][j + 6] == 2 && a[i][j + 8] == 2) return 2;
-			else if (a[i][j] == 2 && a[i + 4][j + 2] == 2 && a[i + 8][j + 4] == 2 && a[i + 12][j + 6] == 2 && a[i + 16][j + 8] == 2) return 2;
-			else if (a[i][j] == 2 && a[i + 4][j - 2] == 2 && a[i + 8][j - 4] == 2 && a[i + 12][j - 6] == 2 && a[i + 16][j - 8] == 2) return 2;
+			if (a[i][j] == 1 && a[i + 4][j] == 1 && a[i + 8][j] == 1 && a[i + 12][j] == 1 && a[i + 16][j] == 1)
+			{
+				AnConTro();
+				for (int k(1); k <= 10; k++)
+				{
+					gotoXY(i, j); cout << " ";
+					gotoXY(i + 4, j); cout << " ";
+					gotoXY(i + 8, j); cout << " ";
+					gotoXY(i + 12, j); cout << " ";
+					gotoXY(i + 16, j); cout << " ";
+					Sleep(100);
+					gotoXY(i, j); cout << "X";
+					gotoXY(i + 4, j); cout << "X";
+					gotoXY(i + 8, j); cout << "X";
+					gotoXY(i + 12, j); cout << "X";
+					gotoXY(i + 16, j); cout << "X";
+					Sleep(100);
+				}
+				HienConTro();
+				return 1;
+			}
+			else if (a[i][j] == 1 && a[i][j + 2] == 1 && a[i][j + 4] == 1 && a[i][j + 6] == 1 && a[i][j + 8] == 1) 
+			{
+				AnConTro();
+				for (int k(1); k <= 10; k++)
+				{
+					gotoXY(i, j); cout << " ";
+					gotoXY(i, j + 2); cout << " ";
+					gotoXY(i, j + 4); cout << " ";
+					gotoXY(i, j + 6); cout << " ";
+					gotoXY(i, j + 8); cout << " ";
+					Sleep(100);
+					gotoXY(i, j); cout << "X";
+					gotoXY(i, j + 2); cout << "X";				
+					gotoXY(i, j + 4); cout << "X";
+					gotoXY(i, j + 6); cout << "X";
+					gotoXY(i, j + 8); cout << "X";	
+					Sleep(100);
+				}
+				HienConTro();
+				return 1;
+			}
+			else if (a[i][j] == 1 && a[i + 4][j + 2] == 1 && a[i + 8][j + 4] == 1 && a[i + 12][j + 6] == 1 && a[i + 16][j + 8] == 1)
+			{
+				AnConTro();
+				for (int k(1); k <= 10; k++)
+				{
+					gotoXY(i, j); cout << " ";	
+					gotoXY(i + 4, j + 2); cout << " ";
+					gotoXY(i + 8, j + 4); cout << " ";
+					gotoXY(i + 12, j + 6); cout << " ";
+					gotoXY(i + 16, j + 8); cout << " ";
+					Sleep(100);
+					gotoXY(i, j); cout << "X";
+					gotoXY(i + 4, j + 2); cout << "X";;
+					gotoXY(i + 8, j + 4); cout << "X";
+					gotoXY(i + 12, j + 6); cout << "X";				
+					gotoXY(i + 16, j + 8); cout << "X";
+					Sleep(100);
+				}
+				HienConTro();
+				return 1;
+			}
+			else if (a[i][j] == 1 && a[i + 4][j - 2] == 1 && a[i + 8][j - 4] == 1 && a[i + 12][j - 6] == 1 && a[i + 16][j - 8] == 1) 
+			{
+				AnConTro();
+				for (int k(1); k <= 10; k++)
+				{
+					gotoXY(i, j); cout << " ";	
+					gotoXY(i + 4, j - 2); cout << " ";	
+					gotoXY(i + 8, j - 4); cout << " ";
+					gotoXY(i + 12, j - 6); cout << " ";
+					gotoXY(i + 16, j - 8); cout << " ";
+					Sleep(100);
+					gotoXY(i, j); cout << "X";
+					gotoXY(i + 4, j - 2); cout << "X";
+					gotoXY(i + 8, j - 4); cout << "X";
+					gotoXY(i + 12, j - 6); cout << "X";
+					gotoXY(i + 16, j - 8); cout << "X";
+					Sleep(100);
+				}
+				HienConTro();
+				return 1;
+			}
+			else if (a[i][j] == 2 && a[i + 4][j] == 2 && a[i + 8][j] == 2 && a[i + 12][j] == 2 && a[i + 16][j] == 2)
+			{
+				AnConTro();
+				for (int k(1); k <= 5; k++)
+				{
+					gotoXY(i, j); cout << " ";
+					gotoXY(i + 4, j); cout << " ";
+					gotoXY(i + 8, j); cout << " ";
+					gotoXY(i + 12, j); cout << " ";
+					gotoXY(i + 16, j); cout << " ";
+					Sleep(100);
+					gotoXY(i, j); cout << "O";
+					gotoXY(i + 4, j); cout << "O";
+					gotoXY(i + 8, j); cout << "O";
+					gotoXY(i + 12, j); cout << "O";
+					gotoXY(i + 16, j); cout << "O";
+					Sleep(100);
+				}
+				HienConTro();
+				return 2;
+			}
+			else if (a[i][j] == 2 && a[i][j + 2] == 2 && a[i][j + 4] == 2  && a[i][j + 6] == 2 && a[i][j + 8] == 2) 
+			{
+				AnConTro();
+				for (int k(1); k <= 5; k++)
+				{
+					gotoXY(i, j); cout << " ";
+					gotoXY(i, j + 2); cout << " ";
+					gotoXY(i, j + 4); cout << " ";
+					gotoXY(i, j + 6); cout << " ";
+					gotoXY(i, j + 8); cout << " ";
+					Sleep(100);
+					gotoXY(i, j); cout << "O";
+					gotoXY(i, j + 2); cout << "O";
+					gotoXY(i, j + 4); cout << "O";
+					gotoXY(i, j + 6); cout << "O";
+					gotoXY(i, j + 8); cout << "O";
+					Sleep(100);
+				}
+				HienConTro();
+				return 2;
+			}
+			else if (a[i][j] == 2 && a[i + 4][j + 2] == 2 && a[i + 8][j + 4] == 2 && a[i + 12][j + 6] == 2 && a[i + 16][j + 8] == 2) 
+			{
+				AnConTro();
+				for (int k(1); k <= 5; k++)
+				{
+					gotoXY(i, j); cout << " ";
+					gotoXY(i + 4, j + 2); cout << " ";
+					gotoXY(i + 8, j + 4); cout << " ";
+					gotoXY(i + 12, j + 6); cout << " ";
+					gotoXY(i + 16, j + 8); cout << " ";
+					Sleep(100);
+					gotoXY(i, j); cout << "O";
+					gotoXY(i + 4, j + 2); cout << "O";;
+					gotoXY(i + 8, j + 4); cout << "O";
+					gotoXY(i + 12, j + 6); cout << "O";
+					gotoXY(i + 16, j + 8); cout << "O";
+					Sleep(100);
+				}
+				HienConTro();
+				return 2;
+			}
+			else if (a[i][j] == 2 && a[i + 4][j - 2] == 2 && a[i + 8][j - 4] == 2 && a[i + 12][j - 6] == 2 && a[i + 16][j - 8] == 2) 
+			{
+				AnConTro();
+				for (int k(1); k <= 5; k++)
+				{
+					gotoXY(i, j); cout << " ";
+					gotoXY(i + 4, j - 2); cout << " ";
+					gotoXY(i + 8, j - 4); cout << " ";
+					gotoXY(i + 12, j - 6); cout << " ";
+					gotoXY(i + 16, j - 8); cout << " ";
+					Sleep(100);
+					gotoXY(i, j); cout << "O";
+					gotoXY(i + 4, j - 2); cout << "O";
+					gotoXY(i + 8, j - 4); cout << "O";
+					gotoXY(i + 12, j - 6); cout << "O";
+					gotoXY(i + 16, j - 8); cout << "O";
+					Sleep(100);
+				}
+				HienConTro();
+				return 2;
+			}
 			else check = 0;
 		}
 	}
@@ -189,7 +347,7 @@ void init(int turn)
 	string first;
 	system("cls");
 	gotoXY(46, 8); cout << "Initializing ";
-	for (int i(1); i <= 5;i++)
+	for (int i(1); i <= 3;i++)
 	{
 		gotoXY(58, 8);
 		for (int i(1); i <= 5; i++)
@@ -204,8 +362,22 @@ void init(int turn)
 		}
 	}
 	system("cls");
-	if (initTurn() == 1) first = "X";
-	else if (initTurn() == 2) first = "O";
+	if (turn == 1) first = "X";
+	else if (turn == 2) first = "O";
 	gotoXY(46, 8); cout << "PLAYER " << first << " GO FIRST";
-	Sleep(2000);
+	Sleep(1500);
+}
+void AnConTro()
+{
+	CONSOLE_CURSOR_INFO Info;
+	Info.bVisible = FALSE;
+	Info.dwSize = 20;
+	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &Info);
+}
+void HienConTro()
+{
+	CONSOLE_CURSOR_INFO Info;
+	Info.bVisible = TRUE;
+	Info.dwSize = 20;
+	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &Info);
 }

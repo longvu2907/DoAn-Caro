@@ -9,3 +9,5 @@ int checkXO();
 void tickXO(int, int, int&);
 void resetBoard();
 void init(int);
+void AnConTro();
+void HienConTro();
