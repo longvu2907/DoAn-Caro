@@ -4,6 +4,7 @@ int a[60][60] = {};
 
 void Play(int& k1, int& k2,int & set, int mode,int turn)
 {
+	HienConTro();
 	char k;
 	int value;
 	int x(5), y(4);
@@ -13,24 +14,50 @@ void Play(int& k1, int& k2,int & set, int mode,int turn)
 		oTurn(x,y,turn);
 		k = _getch();
 		value = k;
-		if (value == -32)
+		if (value == -32 )
 		{
 			value = _getch();
 			switch (value)
 			{
 			case 72:
+			case 119:
 				if (y > 4) y -= 2;
 				gotoXY(x, y);
 				break;
 			case 75:
+			case 97:
 				if (x > 5) x -= 4;
 				gotoXY(x, y);
 				break;
 			case 77:
+			case 100:
 				if (x < 49) x += 4;
 				gotoXY(x, y);
 				break;
 			case 80:
+			case 115:
+				if (y < 26) y += 2;
+				gotoXY(x, y);
+				break;
+			}
+		}
+		else if (value == 115 || value == 97 || value == 100 || value == 119)
+		{
+			switch (value)
+			{
+			case 119:
+				if (y > 4) y -= 2;
+				gotoXY(x, y);
+				break;
+			case 97:
+				if (x > 5) x -= 4;
+				gotoXY(x, y);
+				break;
+			case 100:
+				if (x < 49) x += 4;
+				gotoXY(x, y);
+				break;
+			case 115:
 				if (y < 26) y += 2;
 				gotoXY(x, y);
 				break;
@@ -47,15 +74,39 @@ void Play(int& k1, int& k2,int & set, int mode,int turn)
 				if (k1 == mode)
 				{
 					system("cls");
-					gotoXY(47, 3);
+					AnConTro();
+					gotoXY(47, 7);
+					Textcolor(Red);
 					cout << "PLAYER X WIN !!!!";
-					gotoXY(47, 6); cout << "MAIN MENU";
-					gotoXY(47, 7); cout << "PLAY AGAIN";
-					gotoXY(47, 8); cout << "QUIT GAME";
+					Textcolor(White);
 					x = 47;
-					y = 6;
+					y = 10;
 					while (1)
 					{
+						if (y == 10)
+						{
+							Textcolor(Cyan);
+							gotoXY(47, 10); cout << "MAIN MENU";
+							Textcolor(White);
+							gotoXY(47, 11); cout << "PLAY AGAIN";
+							gotoXY(47, 12); cout << "QUIT GAME";
+						}
+						else if (y == 11)
+						{							
+							gotoXY(47, 10); cout << "MAIN MENU";
+							Textcolor(Cyan);
+							gotoXY(47, 11); cout << "PLAY AGAIN";
+							Textcolor(White);
+							gotoXY(47, 12); cout << "QUIT GAME";
+						}
+						else if (y == 12)
+						{					
+							gotoXY(47, 10); cout << "MAIN MENU";					
+							gotoXY(47, 11); cout << "PLAY AGAIN";
+							Textcolor(Cyan);
+							gotoXY(47, 12); cout << "QUIT GAME";
+							Textcolor(White);
+						}
 						gotoXY(x, y);
 						k = _getch();
 						value = k;
@@ -65,17 +116,23 @@ void Play(int& k1, int& k2,int & set, int mode,int turn)
 							value = _getch();
 							if (value == 72)
 							{
-								if (y > 6) { y--; gotoXY(x, y); } break;
+								if (y > 10) { y--; gotoXY(x, y); } break;
 							}
 							else if (value == 80)
 							{
-								if (y < 8) { y++; gotoXY(x, y); } break;
+								if (y < 12) { y++; gotoXY(x, y); } break;
 							}
 							break;
+						case 119:
+							if (y > 10) { y--; gotoXY(x, y); }
+							break;
+						case 115:
+								if (y < 12) { y++; gotoXY(x, y); } 
+							break;
 						case 13:
-							if (y == 6) Start();
-							else if (y == 7) NewGame(0, 0, 1);
-							else if (y == 8) exit(0);
+							if (y == 10) Start();
+							else if (y == 11) NewGame(0, 0, 1);
+							else if (y == 12) exit(0);
 						}
 					}
 				}
@@ -92,15 +149,39 @@ void Play(int& k1, int& k2,int & set, int mode,int turn)
 				if (k2 == mode)
 				{
 					system("cls");
-					gotoXY(47, 3);
+					AnConTro();
+					gotoXY(47, 7);
+					Textcolor(Blue);
 					cout << "PLAYER O WIN !!!!";
-					gotoXY(47, 6); cout << "MAIN MENU";
-					gotoXY(47, 7); cout << "PLAY AGAIN";
-					gotoXY(47, 8); cout << "QUIT GAME";
+					Textcolor(White);
 					x = 47;
-					y = 6;
+					y = 10;
 					while (1)
 					{
+						if (y == 10)
+						{
+							Textcolor(Cyan);
+							gotoXY(47, 10); cout << "MAIN MENU";
+							Textcolor(White);
+							gotoXY(47, 11); cout << "PLAY AGAIN";
+							gotoXY(47, 12); cout << "QUIT GAME";
+						}
+						else if (y == 11)
+						{
+							gotoXY(47, 10); cout << "MAIN MENU";
+							Textcolor(Cyan);
+							gotoXY(47, 11); cout << "PLAY AGAIN";
+							Textcolor(White);
+							gotoXY(47, 12); cout << "QUIT GAME";
+						}
+						else if (y == 12)
+						{
+							gotoXY(47, 10); cout << "MAIN MENU";
+							gotoXY(47, 11); cout << "PLAY AGAIN";
+							Textcolor(Cyan);
+							gotoXY(47, 12); cout << "QUIT GAME";
+							Textcolor(White);
+						}
 						gotoXY(x, y);
 						k = _getch();
 						value = k;
@@ -110,17 +191,23 @@ void Play(int& k1, int& k2,int & set, int mode,int turn)
 							value = _getch();
 							if (value == 72)
 							{
-								if (y > 6) { y--; gotoXY(x, y); } break;
+								if (y > 10) { y--; gotoXY(x, y); } break;
 							}
 							else if (value == 80)
 							{
-								if (y < 8) { y++; gotoXY(x, y); } break;
+								if (y < 12) { y++; gotoXY(x, y); } break;
 							}
 							break;
+						case 119:
+							if (y > 10) { y--; gotoXY(x, y); }
+							break;
+						case 115:
+							if (y < 12) { y++; gotoXY(x, y); }
+							break;
 						case 13:
-							if (y == 6) Start();
-							else if (y == 7) NewGame(0, 0, 1);
-							else if (y == 8) exit(0);
+							if (y == 10) Start();
+							else if (y == 11) NewGame(0, 0, 1);
+							else if (y == 12) exit(0);
 						}
 					}
 				}
@@ -140,16 +227,18 @@ void tickXO(int x, int y, int& turn)
 	else if (turn == 1)
 	{
 		a[x][y] = 1;
+		Textcolor(Red);
 		cout << "X";
 		turn = swapTurn(turn);
 	}
 	else if (turn== 2)
 	{
 		a[x][y] = 2;
+		Textcolor(Blue);
 		cout << "O";
 		turn = swapTurn(turn);
 	}
-	
+	Textcolor(White);
 }
 int checkXO()
 {

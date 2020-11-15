@@ -3,7 +3,6 @@
 int initTurn()
 {
 	unsigned int initTurn;
-	srand(time(NULL));
 	initTurn = rand() % 2 + 1;
 	return initTurn;
 }
@@ -17,18 +16,20 @@ void oTurn(int x,int y,int turn)
 {
 	if (turn == 1)
 	{
-		gotoXY(9, 2);
-		cout << " ";
+		AnConTro();
+		Textcolor(Red);
 		gotoXY(9, 2);
 		cout << "X";
 		gotoXY(x, y);
+		HienConTro();
 	}
 	else
 	{
-		gotoXY(9, 2);
-		cout << " ";
+		AnConTro();
+		Textcolor(Blue);
 		gotoXY(9, 2);
 		cout << "O";
 		gotoXY(x, y);
+		HienConTro();
 	}
 }

@@ -25,3 +25,9 @@ void Start()
 	FixConsoleWindow();
 	mainMenu();
 }
+void Textcolor(int color)
+{
+	HANDLE hConsoleColor;
+	hConsoleColor = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(hConsoleColor, color);
+}

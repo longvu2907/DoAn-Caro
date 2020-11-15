@@ -102,7 +102,14 @@ void DrawBoard(int k1, int k2, int set,int mode)
 			}
 		}
 	}
-	gotoXY(25, 2); cout << k1 << " - " << k2;
+	gotoXY(25, 2); 
+	Textcolor(Red);
+	cout << k1;
+	Textcolor(White);
+	cout << " - ";
+	Textcolor(Blue);
+	cout<< k2;
+	Textcolor(White);
 	gotoXY(3, 2); cout << "Turn: ";
 	FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
 }
