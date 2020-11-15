@@ -2,7 +2,7 @@
 
 int a[60][60] = {};
 
-void Play(int& k1, int& k2,int & set, int mode,int turn)
+void Play(int& k1, int& k2, int& set, int mode, int turn, int color)
 {
 	HienConTro();
 	char k;
@@ -85,7 +85,7 @@ void Play(int& k1, int& k2,int & set, int mode,int turn)
 					{
 						if (y == 10)
 						{
-							Textcolor(Cyan);
+							Textcolor(color);
 							gotoXY(47, 10); cout << "MAIN MENU";
 							Textcolor(White);
 							gotoXY(47, 11); cout << "PLAY AGAIN";
@@ -94,7 +94,7 @@ void Play(int& k1, int& k2,int & set, int mode,int turn)
 						else if (y == 11)
 						{							
 							gotoXY(47, 10); cout << "MAIN MENU";
-							Textcolor(Cyan);
+							Textcolor(color);
 							gotoXY(47, 11); cout << "PLAY AGAIN";
 							Textcolor(White);
 							gotoXY(47, 12); cout << "QUIT GAME";
@@ -103,7 +103,7 @@ void Play(int& k1, int& k2,int & set, int mode,int turn)
 						{					
 							gotoXY(47, 10); cout << "MAIN MENU";					
 							gotoXY(47, 11); cout << "PLAY AGAIN";
-							Textcolor(Cyan);
+							Textcolor(color);
 							gotoXY(47, 12); cout << "QUIT GAME";
 							Textcolor(White);
 						}
@@ -140,7 +140,7 @@ void Play(int& k1, int& k2,int & set, int mode,int turn)
 				set++;
 				DrawBoard(k1, k2, set, mode);
 				resetBoard();
-				Play(k1, k2, set, mode,turn);
+				Play(k1, k2, set, mode, turn, color);
 			}
 			else if (checkXO() == 2)
 			{
@@ -160,7 +160,7 @@ void Play(int& k1, int& k2,int & set, int mode,int turn)
 					{
 						if (y == 10)
 						{
-							Textcolor(Cyan);
+							Textcolor(color);
 							gotoXY(47, 10); cout << "MAIN MENU";
 							Textcolor(White);
 							gotoXY(47, 11); cout << "PLAY AGAIN";
@@ -169,7 +169,7 @@ void Play(int& k1, int& k2,int & set, int mode,int turn)
 						else if (y == 11)
 						{
 							gotoXY(47, 10); cout << "MAIN MENU";
-							Textcolor(Cyan);
+							Textcolor(color);
 							gotoXY(47, 11); cout << "PLAY AGAIN";
 							Textcolor(White);
 							gotoXY(47, 12); cout << "QUIT GAME";
@@ -178,7 +178,7 @@ void Play(int& k1, int& k2,int & set, int mode,int turn)
 						{
 							gotoXY(47, 10); cout << "MAIN MENU";
 							gotoXY(47, 11); cout << "PLAY AGAIN";
-							Textcolor(Cyan);
+							Textcolor(color);
 							gotoXY(47, 12); cout << "QUIT GAME";
 							Textcolor(White);
 						}
@@ -215,7 +215,7 @@ void Play(int& k1, int& k2,int & set, int mode,int turn)
 				set++;
 				DrawBoard(k1, k2, set, mode);
 				resetBoard();
-				Play(k1, k2, set, mode,turn);
+				Play(k1, k2, set, mode, turn, color);
 			}
 		}
 	}

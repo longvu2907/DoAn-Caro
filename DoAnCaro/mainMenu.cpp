@@ -4,9 +4,11 @@
 char k;
 int value;
 char name1, name2;
+int color = Cyan;
 
 void mainMenu()
 {
+	
 	system("cls");
 	int x(51), y(7);
 	AnConTro();	
@@ -15,52 +17,73 @@ void mainMenu()
 	{
 		if (y == 7)
 		{
-			Textcolor(Cyan);
+			Textcolor(color);
 			gotoXY(x, 7); cout << "PLAYER VS PLAYER";
 			Textcolor(White);
 			gotoXY(x, 8); cout << "PLAYER VS BOT";
 			gotoXY(x, 9); cout << "LOAD GAME";
-			gotoXY(x, 10); cout << "ABOUT";
-			gotoXY(x, 11); cout << "EXIT";
+			gotoXY(x, 10); cout << "SETTING";
+			gotoXY(x, 11); cout << "ABOUT";
+			gotoXY(x, 12); cout << "EXIT";
+			
 		}
-		if (y == 8)
+		else if (y == 8)
 		{
 			gotoXY(x, 7); cout << "PLAYER VS PLAYER";
-			Textcolor(Cyan);
+			Textcolor(color);
 			gotoXY(x, 8); cout << "PLAYER VS BOT";
 			Textcolor(White);
 			gotoXY(x, 9); cout << "LOAD GAME";
-			gotoXY(x, 10); cout << "ABOUT";
-			gotoXY(x, 11); cout << "EXIT";
+			gotoXY(x, 10); cout << "SETTING";
+			gotoXY(x, 11); cout << "ABOUT";
+			gotoXY(x, 12); cout << "EXIT";
+			
 		}
-		if (y == 9)
+		else if (y == 9)
 		{
 			gotoXY(x, 7); cout << "PLAYER VS PLAYER";
 			gotoXY(x, 8); cout << "PLAYER VS BOT";
-			Textcolor(Cyan);
+			Textcolor(color);
 			gotoXY(x, 9); cout << "LOAD GAME";
 			Textcolor(White);
-			gotoXY(x, 10); cout << "ABOUT";
-			gotoXY(x, 11); cout << "EXIT";
+			gotoXY(x, 10); cout << "SETTING";
+			gotoXY(x, 11); cout << "ABOUT";
+			gotoXY(x, 12); cout << "EXIT";
+			
 		}
-		if (y == 10)
+		else if (y == 10)
 		{
 			gotoXY(x, 7); cout << "PLAYER VS PLAYER";
 			gotoXY(x, 8); cout << "PLAYER VS BOT";
 			gotoXY(x, 9); cout << "LOAD GAME";
-			Textcolor(Cyan);
-			gotoXY(x, 10); cout << "ABOUT";
+			Textcolor(color);
+			gotoXY(x, 10); cout << "SETTING";
 			Textcolor(White);
-			gotoXY(x, 11); cout << "EXIT";
+			gotoXY(x, 11); cout << "ABOUT";
+			gotoXY(x, 12); cout << "EXIT";
+			
 		}
-		if (y == 11)
+		else if (y == 11)
 		{
 			gotoXY(x, 7); cout << "PLAYER VS PLAYER";
 			gotoXY(x, 8); cout << "PLAYER VS BOT";
 			gotoXY(x, 9); cout << "LOAD GAME";
-			gotoXY(x, 10); cout << "ABOUT";
-			Textcolor(Cyan);
-			gotoXY(x, 11); cout << "EXIT";
+			gotoXY(x, 10); cout << "SETTING";
+			Textcolor(color);
+			gotoXY(x, 11); cout << "ABOUT";
+			Textcolor(White);
+			gotoXY(x, 12); cout << "EXIT";
+		
+		}	
+		else if (y == 12)
+		{
+			gotoXY(x, 7); cout << "PLAYER VS PLAYER";
+			gotoXY(x, 8); cout << "PLAYER VS BOT";
+			gotoXY(x, 9); cout << "LOAD GAME";
+			gotoXY(x, 10); cout << "SETTING";
+			gotoXY(x, 11); cout << "ABOUT";	
+			Textcolor(color);
+			gotoXY(x, 12); cout << "EXIT";
 			Textcolor(White);
 		}
 		k = _getch();
@@ -71,7 +94,7 @@ void mainMenu()
 			if (y > 7) { y--; gotoXY(x, y); }
 			break;
 		case 115:
-			if (y < 11) { y++; gotoXY(x, y); }
+			if (y < 12) { y++; gotoXY(x, y); }
 			break;
 		case -32:
 			value = _getch();
@@ -82,7 +105,7 @@ void mainMenu()
 			}
 			else if (value == 80)
 			{
-				if (y < 11) { y++; gotoXY(x, y); } 
+				if (y < 12) { y++; gotoXY(x, y); } 
 				break;
 			}
 			break;
@@ -99,11 +122,14 @@ void mainMenu()
 			}
 			else if (y == 10)
 			{
-				About();
+				Color(color);
 			}
 			else if (y == 11)
 			{
-				system("cls");
+				About();
+			}
+			else if (y == 12)
+			{
 				exit(0);
 			}
 		}
@@ -119,8 +145,9 @@ void NewGame(int k1, int k2 ,int set)
 	init(turn);
 	DrawBoard(k1, k2, set, mode);
 	resetBoard();
-	Play(k1, k2, set, mode,turn);
+	Play(k1, k2, set, mode, turn, color);
 }
+
 void LoadGame()
 {
 	system("cls");
@@ -138,6 +165,7 @@ void LoadGame()
 	cout << "Tinh nang dang phat trien.";
 	if (_getch()) mainMenu();
 }
+
 void NLV()
 {
 	gotoXY(53, 3); cout << "CONTACT FOR WORK:";
@@ -165,7 +193,7 @@ void About()
 		if (y == 7)
 		{
 			gotoXY(53, 3); cout << "ABOUT";
-			Textcolor(Cyan);
+			Textcolor(color);
 			gotoXY(48, 7); cout << "NGUYEN LONG VU";
 			Textcolor(White);
 			gotoXY(52, 8); cout << "20CTT3";
@@ -181,7 +209,7 @@ void About()
 			gotoXY(52, 8); cout << "20CTT3";
 			gotoXY(48, 9); cout << "MSSV: 20120405";
 			gotoXY(46, 10); cout << "GIAO VIEN HUONG DAN ";
-			Textcolor(Cyan);
+			Textcolor(color);
 			gotoXY(47, 11); cout << "TRUONG TOAN THINH";
 			Textcolor(White);
 			gotoXY(53, 15); cout << "BACK";
@@ -194,7 +222,7 @@ void About()
 			gotoXY(48, 9); cout << "MSSV: 20120405";
 			gotoXY(46, 10); cout << "GIAO VIEN HUONG DAN ";
 			gotoXY(47, 11); cout << "TRUONG TOAN THINH";
-			Textcolor(Cyan);
+			Textcolor(color);
 			gotoXY(53, 15); cout << "BACK";
 			Textcolor(White);
 		}
@@ -248,6 +276,7 @@ void About()
 		}
 	}
 }
+
 int Mode()
 {
 	int mode;	
@@ -258,25 +287,25 @@ int Mode()
 	{
 		if (y == 8)
 		{
-			Textcolor(Cyan);
+			Textcolor(color);
 			gotoXY(54, 8); cout << "BO1\n";
 			Textcolor(White);
 			gotoXY(54, 9); cout << "BO3\n";
 			gotoXY(54, 10); cout << "BO5\n";
 		}
-		if (y == 9)
+		else if (y == 9)
 		{
 			gotoXY(54, 8); cout << "BO1\n";
-			Textcolor(Cyan);
+			Textcolor(color);
 			gotoXY(54, 9); cout << "BO3\n";
 			Textcolor(White);
 			gotoXY(54, 10); cout << "BO5\n";
 		}
-		if (y == 10)
+		else if (y == 10)
 		{
 			gotoXY(54, 8); cout << "BO1\n";
 			gotoXY(54, 9); cout << "BO3\n";
-			Textcolor(Cyan);
+			Textcolor(color);
 			gotoXY(54, 10); cout << "BO5\n";
 			Textcolor(White);
 		}
@@ -310,3 +339,128 @@ int Mode()
 		}
 	}
 }
+
+void Color(int& color)
+{
+	int x(51), y(7);
+	system("cls");
+	
+	while (1)
+	{	
+		if (y == 7)
+		{
+			Textcolor(Red);
+			gotoXY(51, 7); cout << "RED";
+			Textcolor(White);
+			gotoXY(51, 8); cout << "GREEN";
+			gotoXY(51, 9); cout << "BLUE";
+			gotoXY(51, 10); cout << "CYAN";
+			gotoXY(51, 11); cout << "PINK";
+			gotoXY(51, 12); cout << "YELLOW";
+		}
+		else if (y == 8)
+		{
+			gotoXY(51, 7); cout << "RED";
+			Textcolor(Green);
+			gotoXY(51, 8); cout << "GREEN";
+			Textcolor(White);
+			gotoXY(51, 9); cout << "BLUE";
+			gotoXY(51, 10); cout << "CYAN";
+			gotoXY(51, 11); cout << "PINK";
+			gotoXY(51, 12); cout << "YELLOW";
+		}
+		else if (y == 9)
+		{
+			gotoXY(51, 7); cout << "RED";
+			gotoXY(51, 8); cout << "GREEN";
+			Textcolor(Blue);
+			gotoXY(51, 9); cout << "BLUE";
+			Textcolor(White);
+			gotoXY(51, 10); cout << "CYAN";
+			gotoXY(51, 11); cout << "PINK";
+			gotoXY(51, 12); cout << "YELLOW";
+		}
+		else if (y == 10)
+		{
+			gotoXY(51, 7); cout << "RED";
+			gotoXY(51, 8); cout << "GREEN";
+			gotoXY(51, 9); cout << "BLUE";
+			Textcolor(Cyan);
+			gotoXY(51, 10); cout << "CYAN";
+			Textcolor(White);
+			gotoXY(51, 11); cout << "PINK";
+			gotoXY(51, 12); cout << "YELLOW";
+		}
+		else if (y == 11)
+		{
+			gotoXY(51, 7); cout << "RED";
+			gotoXY(51, 8); cout << "GREEN";
+			gotoXY(51, 9); cout << "BLUE";
+			gotoXY(51, 10); cout << "CYAN";
+			Textcolor(Pink);
+			gotoXY(51, 11); cout << "PINK";
+			Textcolor(White);
+			gotoXY(51, 12); cout << "YELLOW";
+		}
+		else if (y == 12)
+		{
+			gotoXY(51, 7); cout << "RED";
+			gotoXY(51, 8); cout << "GREEN";
+			gotoXY(51, 9); cout << "BLUE";
+			gotoXY(51, 10); cout << "CYAN";
+			gotoXY(51, 11); cout << "PINK";
+			Textcolor(Yellow);
+			gotoXY(51, 12); cout << "YELLOW";
+			Textcolor(White);
+		}	
+		k = _getch();
+		value = k;
+		
+		switch (value)
+		{
+		case -32:
+			value = _getch();
+			if (value == 72)
+			{
+				if (y > 7)
+				{
+					y--;
+					gotoXY(x, y);
+				}
+			}
+			else if (value == 80)
+			{
+				if (y < 12)
+				{
+					y++;
+					gotoXY(x, y);
+				}
+			}
+			break;
+		case 119:
+			if (y > 7)
+			{
+				y--;
+				gotoXY(x, y);
+			}
+			break;
+		case 115:
+			if (y < 12)
+			{
+				y++;
+				gotoXY(x, y);
+			}
+			break;
+		case 13:
+			if (y == 7) color = Red;  
+			else if (y == 8) color = Green;  
+			else if (y == 9) color = Blue;  
+			else if (y == 10)  color = Cyan; 
+			else if (y == 11) color = Pink;  
+			else if (y == 12)  color = Yellow; 
+			system("cls"); 
+			return; 
+		}
+	}
+}
+

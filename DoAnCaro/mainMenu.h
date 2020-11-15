@@ -7,5 +7,5 @@ void NewGame(int,int,int);
 void LoadGame();
 void About();
 int Mode();
-
+void Color(int&);
 
