@@ -1,12 +1,21 @@
 #include "Board.h"
 
-void DrawBoard(int k1, int k2, int set)
+void DrawBoard(int k1, int k2, int set,int mode)
 {	
 	system("cls");
 	gotoXY(51, 7); 
-	cout << "SET " << set;
-	Sleep(500);
-	system("cls");
+	if (k1 == (mode - 1) || k2 == (mode - 1))
+	{ 
+		cout << "MATCH POINT";
+		Sleep(1000);
+		system("cls");
+	}
+	else
+	{
+		cout << "MATCH " << set;
+		Sleep(1000);
+		system("cls");
+	}
 	//Top Line
 	gotoXY(3, 3); cout << char(201);
 	Sleep(10);

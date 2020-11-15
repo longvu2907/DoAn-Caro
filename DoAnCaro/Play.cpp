@@ -81,7 +81,7 @@ void Play(int& k1, int& k2,int & set, int mode,int turn)
 				}
 				
 				set++;
-				DrawBoard(k1, k2, set);
+				DrawBoard(k1, k2, set, mode);
 				resetBoard();
 				Play(k1, k2, set, mode,turn);
 			}
@@ -126,7 +126,7 @@ void Play(int& k1, int& k2,int & set, int mode,int turn)
 				}
 				
 				set++;
-				DrawBoard(k1, k2, set);
+				DrawBoard(k1, k2, set, mode);
 				resetBoard();
 				Play(k1, k2, set, mode,turn);
 			}

@@ -64,7 +64,7 @@ void NewGame(int k1, int k2 ,int set)
 	mode = Mode();
 	int turn = initTurn();
 	init(turn);
-	DrawBoard(k1, k2, set);
+	DrawBoard(k1, k2, set, mode);
 	resetBoard();
 	Play(k1, k2, set, mode,turn);
 }
