@@ -5,16 +5,22 @@ char k;
 int value;
 char name1, name2;
 int color = Cyan;
+int mode = 1;
+int music = 2;
+int sfx = 1;
 
 void mainMenu()
 {
-	
+	if (music == 2)  PlaySound(TEXT("nhoinhoi2.wav"), NULL, SND_ASYNC);
+	else if(music == 1) PlaySound(TEXT("nhoinhoi1.wav"), NULL, SND_ASYNC);
+	else PlaySound(TEXT("none.wav"), NULL, SND_ASYNC);
 	system("cls");
 	int x(51), y(7);
 	AnConTro();	
 	gotoXY(x, y);
 	while (1)
 	{
+		
 		if (y == 7)
 		{
 			Textcolor(color);
@@ -110,10 +116,12 @@ void mainMenu()
 			}
 			break;
 		case 13:
+			if (sfx == 1) PlaySound(TEXT("button.wav"), NULL, SND_ASYNC);
+			else PlaySound(TEXT("none.wav"), NULL, SND_ASYNC);
 			if (y == 7)
 			{
 				int k1(0), k2(0), set(1);
-				NewGame(k1, k2, set);
+				NewGame(k1, k2, set, mode);
 				break;
 			}
 			else if (y == 8||y == 9)
@@ -122,7 +130,8 @@ void mainMenu()
 			}
 			else if (y == 10)
 			{
-				Color(color);
+				Setting(color, music, mode, sfx);
+				mainMenu();
 			}
 			else if (y == 11)
 			{
@@ -137,15 +146,13 @@ void mainMenu()
 }
 
 
-void NewGame(int k1, int k2 ,int set)
+void NewGame(int k1, int k2 ,int set,int mode)
 {
-	int mode;
-	mode = Mode();
 	int turn = initTurn();
-	init(turn);
+	Init(turn);
 	DrawBoard(k1, k2, set, mode);
 	resetBoard();
-	Play(k1, k2, set, mode, turn, color);
+	Play(k1, k2, set, mode, turn, color, sfx);
 }
 
 void LoadGame()
@@ -157,7 +164,6 @@ void LoadGame()
 	for (int i(1); i <= 50; i++)
 	{
 		cout << char(219);
-		if (i == 25) Sleep(3000);
 		Sleep(100);
 	}
 	system("cls");
@@ -340,22 +346,84 @@ int Mode()
 	}
 }
 
-void Color(int& color)
+void Setting(int& color, int& music, int& mode, int& sfx)
 {
 	int x(45), y(9);
 	int n(1);
 	system("cls");
 	gotoXY(45, 9); cout << "COLOR:";
+	gotoXY(45, 10); cout << "SOUND:";
+	gotoXY(55, 10);
+	if (music == 2)
+	{
+		cout << char(174);
+		cout << "   100%  ";
+		cout << char(175);
+	}
+	else if (music == 1)
+	{
+		cout << char(174);
+		cout << "   50%   ";
+		cout << char(175);
+	}
+	else if (music == 0)
+	{
+		cout << char(174);
+		cout << "   OFF   ";
+		cout << char(175);
+	}
+
+	gotoXY(45, 11);  cout << "SFX:";
+	gotoXY(55, 11);
+	if (sfx == 1)
+	{
+		cout << char(174);
+		cout << "   ON    ";
+		cout << char(175);
+	}
+	else if (sfx == 0)
+	{
+		cout << char(174);
+		cout << "   OFF   ";
+		cout << char(175);
+	}
+	gotoXY(45, 12); cout << "MODE:";
+	gotoXY(55, 12);
+	if (mode == 1)
+	{
+		cout << char(174);
+		cout << "   BO1   ";
+		cout << char(175);
+	}
+	else if (mode == 3)
+	{
+		cout << char(174);
+		cout << "   BO3   ";
+		cout << char(175);
+	}
+	else if (mode == 5)
+	{
+		cout << char(174);
+		cout << "   BO5   ";
+		cout << char(175);
+	}
+	gotoXY(45, 9);
 	while (1)
 	{
 		if (y == 9)
 		{
+			Textcolor(color);
+			gotoXY(45, 9); cout << "COLOR:";
+			Textcolor(White);
+			gotoXY(45, 10); cout << "MUSIC:";
+			gotoXY(45, 11); cout << "SFX:";
+			gotoXY(45, 12); cout << "MODE:";
 			gotoXY(55, 9);
 			if (n == 1)
 			{
 				cout << char(174);
-				Textcolor(Red);
-				cout << "   Red   ";
+				Textcolor(Cyan);
+				cout << "   CYAN  ";
 				Textcolor(White);
 				cout << char(175);
 			}
@@ -363,7 +431,7 @@ void Color(int& color)
 			{
 				cout << char(174);
 				Textcolor(Green);
-				cout << "  Green  ";
+				cout << "   GREEN ";
 				Textcolor(White);
 				cout << char(175);
 			}
@@ -371,15 +439,15 @@ void Color(int& color)
 			{
 				cout << char(174);
 				Textcolor(Blue);
-				cout << "  Blue   ";
+				cout << "   BLUE  ";
 				Textcolor(White);
 				cout << char(175);
 			}
 			else if (n == 4)
 			{
 				cout << char(174);
-				Textcolor(Cyan);
-				cout << "  Cyan   ";
+				Textcolor(Red);
+				cout << "   RED   ";
 				Textcolor(White);
 				cout << char(175);
 			}
@@ -387,7 +455,7 @@ void Color(int& color)
 			{
 				cout << char(174);
 				Textcolor(Pink);
-				cout << "  Pink   ";
+				cout << "   PINK  ";
 				Textcolor(White);
 				cout << char(175);
 			}
@@ -395,7 +463,7 @@ void Color(int& color)
 			{
 				cout << char(174);
 				Textcolor(Yellow);
-				cout << " Yellow  ";
+				cout << "  YELLOW ";
 				Textcolor(White);
 				cout << char(175);
 			}
@@ -403,6 +471,12 @@ void Color(int& color)
 			value = k;
 			switch (value)
 			{
+			case 100:
+				if (n < 6) n++;
+				break;
+			case 97:
+				if (n > 1) n--;
+				break;
 			case -32:
 				value = _getch();
 				if (value == 77)
@@ -415,15 +489,186 @@ void Color(int& color)
 				}
 				break;
 			case 13:
-				if (n == 1) color = Red;
+				if (n == 1) color = Cyan;
 				else if (n == 2) color = Green;
 				else if (n == 3) color = Blue;
-				else if (n == 4)  color = Cyan;
+				else if (n == 4)  color = Red;
 				else if (n == 5) color = Pink;
 				else if (n == 6)  color = Yellow;
-				system("cls");
-				return;
+				mainMenu();
 			}
+		}
+		else if (y == 10)
+		{
+			gotoXY(45, 9); cout << "COLOR:";
+			Textcolor(color);
+			gotoXY(45, 10);	cout << "MUSIC:";
+			Textcolor(White);
+			gotoXY(45, 11); cout << "SFX:";
+			gotoXY(45, 12); cout << "MODE:";
+			gotoXY(55, 10);
+			if (music == 2)
+			{
+				cout << char(174);
+				cout << "   100%  ";
+				cout << char(175);
+			}
+			else if (music == 1)
+			{
+				cout << char(174);
+				cout << "   50%   ";
+				cout << char(175);
+			}
+			else if (music == 0)
+			{
+				cout << char(174);
+				cout << "   OFF   ";
+				cout << char(175);
+			}
+			k = _getch();
+			value = k;
+			switch (value)
+			{
+			case 100:
+				if (music > 0) music--;
+				break;
+			case 97:
+				if (music < 2) music++;
+				break;
+			case -32:
+				value = _getch();
+				if (value == 77)
+				{
+					if (n < 2) n++;
+				}
+				else if (value == 75)
+				{
+					if (n > 1) n--;
+				}
+				break;
+			case 13:
+				mainMenu();
+			}
+		}
+		else if (y == 11)
+		{
+		gotoXY(45, 9); cout << "COLOR:";
+		gotoXY(45, 10);	cout << "MUSIC:";
+		Textcolor(color);
+		gotoXY(45, 11); cout << "SFX:";
+		Textcolor(White);
+		gotoXY(45, 12); cout << "MODE:";
+		gotoXY(55, 11);
+		if (sfx == 1)
+		{
+			cout << char(174);
+			cout << "   ON    ";
+			cout << char(175);
+		}
+		else if (sfx == 0)
+		{
+			cout << char(174);
+			cout << "   OFF   ";
+			cout << char(175);
+		}
+		k = _getch();
+		value = k;
+		switch (value)
+		{
+		case 100:
+			if (sfx > 0) sfx--;
+			break;
+		case 97:
+			if (sfx < 1) sfx++;
+			break;
+		case -32:
+			value = _getch();
+			if (value == 77)
+			{
+				if (n < 2) n++;
+			}
+			else if (value == 75)
+			{
+				if (n > 1) n--;
+			}
+			break;
+		case 13:
+			mainMenu();
+		}
+		}
+		else if (y == 12)
+		{
+			gotoXY(45, 9); cout << "COLOR:";
+			gotoXY(45, 10);	cout << "MUSIC:";
+			gotoXY(45, 11); cout << "SFX:";
+			Textcolor(color);
+			gotoXY(45, 12);	cout << "MODE:";
+			Textcolor(White);
+			gotoXY(55, 12);
+			if (mode == 1)
+			{
+				cout << char(174);
+				cout << "   BO1   ";
+				cout << char(175);
+			}
+			else if (mode == 3)
+			{
+				cout << char(174);
+				cout << "   BO3   ";
+				cout << char(175);
+			}
+			else if (mode == 5)
+			{
+				cout << char(174);
+				cout << "   BO5   ";
+				cout << char(175);
+			}
+			k = _getch();
+			value = k;
+			switch (value)
+			{
+			case 100:
+				if (mode < 5) mode += 2;
+				break;
+			case 97:
+				if (mode > 1) mode -= 2;
+				break;
+			case -32:
+				value = _getch();
+				if (value == 77)
+				{
+					if (mode < 5) mode += 2;;
+				}
+				else if (value == 75)
+				{
+					if (mode > 1) mode -= 2;
+				}
+				break;
+			case 13:
+				mainMenu();
+			}
+		}
+		switch (value)
+		{
+		case 119:
+			if (y > 9) y--;
+			break;
+		case 115:
+			if (y < 12) y++;
+			break;
+		case -32:
+			value = _getch();
+			switch (value)
+			{
+			case 72:
+				if (y > 9) y--;
+				break;
+			case 80:
+				if (y < 12) y++;
+				break;
+			}
+		case 13:
+			mainMenu();
 		}
 	}
 }

@@ -3,9 +3,9 @@
 #include "Board.h"
 
 void mainMenu();
-void NewGame(int,int,int);
+void NewGame(int,int,int,int);
 void LoadGame();
 void About();
 int Mode();
-void Color(int&);
+void Setting(int&, int&, int&, int&);
 

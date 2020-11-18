@@ -2,7 +2,7 @@
 
 int a[60][60] = {};
 
-void Play(int& k1, int& k2, int& set, int mode, int turn, int color)
+void Play(int& k1, int& k2, int& set, int mode, int turn, int color, int sfx)
 {
 	HienConTro();
 	char k;
@@ -65,9 +65,9 @@ void Play(int& k1, int& k2, int& set, int mode, int turn, int color)
 		}
 		else if (value == 13)
 		{
-			tickXO(x, y, turn);
+			tickXO(x, y, turn, sfx);
 			gotoXY(x, y);
-			if (checkXO() == 1)
+			if (checkXO(sfx) == 1)
 			{
 				k1++;
 				FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
@@ -131,7 +131,7 @@ void Play(int& k1, int& k2, int& set, int mode, int turn, int color)
 							break;
 						case 13:
 							if (y == 10) Start();
-							else if (y == 11) NewGame(0, 0, 1);
+							else if (y == 11) NewGame(0, 0, 1, mode);
 							else if (y == 12) exit(0);
 						}
 					}
@@ -140,9 +140,9 @@ void Play(int& k1, int& k2, int& set, int mode, int turn, int color)
 				set++;
 				DrawBoard(k1, k2, set, mode);
 				resetBoard();
-				Play(k1, k2, set, mode, turn, color);
+				Play(k1, k2, set, mode, turn, color, sfx);
 			}
-			else if (checkXO() == 2)
+			else if (checkXO(sfx) == 2)
 			{
 				k2++;
 				FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
@@ -206,7 +206,7 @@ void Play(int& k1, int& k2, int& set, int mode, int turn, int color)
 							break;
 						case 13:
 							if (y == 10) Start();
-							else if (y == 11) NewGame(0, 0, 1);
+							else if (y == 11) NewGame(0, 0, 1, mode);
 							else if (y == 12) exit(0);
 						}
 					}
@@ -215,17 +215,22 @@ void Play(int& k1, int& k2, int& set, int mode, int turn, int color)
 				set++;
 				DrawBoard(k1, k2, set, mode);
 				resetBoard();
-				Play(k1, k2, set, mode, turn, color);
+				Play(k1, k2, set, mode, turn, color, sfx);
 			}
 		}
 	}
 }
-void tickXO(int x, int y, int& turn)
+void tickXO(int x, int y, int& turn, int sfx)
 {
 
-	if (a[x][y] == 1 || a[x][y] == 2) return;
+	if (a[x][y] == 1 || a[x][y] == 2)
+	{
+		if (sfx == 1) PlaySound(TEXT("error.wav"), NULL, SND_ASYNC);
+		return;
+	}
 	else if (turn == 1)
 	{
+		if (sfx == 1) PlaySound(TEXT("tickX.wav"), NULL, SND_ASYNC);
 		a[x][y] = 1;
 		Textcolor(Red);
 		cout << "X";
@@ -233,6 +238,7 @@ void tickXO(int x, int y, int& turn)
 	}
 	else if (turn== 2)
 	{
+		if (sfx == 1) PlaySound(TEXT("tickO.wav"), NULL, SND_ASYNC);
 		a[x][y] = 2;
 		Textcolor(Blue);
 		cout << "O";
@@ -240,7 +246,7 @@ void tickXO(int x, int y, int& turn)
 	}
 	Textcolor(White);
 }
-int checkXO()
+int checkXO(int sfx)
 {
 	int check;
 	for (int i(5); i <= 49; i += 4)
@@ -249,6 +255,7 @@ int checkXO()
 		{
 			if (a[i][j] == 1 && a[i + 4][j] == 1 && a[i + 8][j] == 1 && a[i + 12][j] == 1 && a[i + 16][j] == 1)
 			{
+				if (sfx == 1) PlaySound(TEXT("win.wav"), NULL, SND_ASYNC);
 				AnConTro();
 				for (int k(1); k <= 10; k++)
 				{
@@ -270,6 +277,7 @@ int checkXO()
 			}
 			else if (a[i][j] == 1 && a[i][j + 2] == 1 && a[i][j + 4] == 1 && a[i][j + 6] == 1 && a[i][j + 8] == 1) 
 			{
+				if (sfx == 1) PlaySound(TEXT("win.wav"), NULL, SND_ASYNC);
 				AnConTro();
 				for (int k(1); k <= 10; k++)
 				{
@@ -291,6 +299,7 @@ int checkXO()
 			}
 			else if (a[i][j] == 1 && a[i + 4][j + 2] == 1 && a[i + 8][j + 4] == 1 && a[i + 12][j + 6] == 1 && a[i + 16][j + 8] == 1)
 			{
+				if (sfx == 1) PlaySound(TEXT("win.wav"), NULL, SND_ASYNC);
 				AnConTro();
 				for (int k(1); k <= 10; k++)
 				{
@@ -312,6 +321,7 @@ int checkXO()
 			}
 			else if (a[i][j] == 1 && a[i + 4][j - 2] == 1 && a[i + 8][j - 4] == 1 && a[i + 12][j - 6] == 1 && a[i + 16][j - 8] == 1) 
 			{
+				if (sfx == 1) PlaySound(TEXT("win.wav"), NULL, SND_ASYNC);
 				AnConTro();
 				for (int k(1); k <= 10; k++)
 				{
@@ -333,6 +343,7 @@ int checkXO()
 			}
 			else if (a[i][j] == 2 && a[i + 4][j] == 2 && a[i + 8][j] == 2 && a[i + 12][j] == 2 && a[i + 16][j] == 2)
 			{
+				if (sfx == 1) PlaySound(TEXT("win.wav"), NULL, SND_ASYNC);
 				AnConTro();
 				for (int k(1); k <= 5; k++)
 				{
@@ -354,6 +365,7 @@ int checkXO()
 			}
 			else if (a[i][j] == 2 && a[i][j + 2] == 2 && a[i][j + 4] == 2  && a[i][j + 6] == 2 && a[i][j + 8] == 2) 
 			{
+			if (sfx == 1) PlaySound(TEXT("win.wav"), NULL, SND_ASYNC);
 				AnConTro();
 				for (int k(1); k <= 5; k++)
 				{
@@ -375,6 +387,7 @@ int checkXO()
 			}
 			else if (a[i][j] == 2 && a[i + 4][j + 2] == 2 && a[i + 8][j + 4] == 2 && a[i + 12][j + 6] == 2 && a[i + 16][j + 8] == 2) 
 			{
+				if (sfx == 1) PlaySound(TEXT("win.wav"), NULL, SND_ASYNC);
 				AnConTro();
 				for (int k(1); k <= 5; k++)
 				{
@@ -396,6 +409,7 @@ int checkXO()
 			}
 			else if (a[i][j] == 2 && a[i + 4][j - 2] == 2 && a[i + 8][j - 4] == 2 && a[i + 12][j - 6] == 2 && a[i + 16][j - 8] == 2) 
 			{
+				if (sfx == 1) PlaySound(TEXT("win.wav"), NULL, SND_ASYNC);
 				AnConTro();
 				for (int k(1); k <= 5; k++)
 				{
@@ -431,25 +445,24 @@ void resetBoard()
 		}
 	}
 }
-void init(int turn)
+void Init(int turn)
 {
 	string first;
 	system("cls");
-	gotoXY(46, 8); cout << "Initializing ";
-	for (int i(1); i <= 3;i++)
+	gotoXY(35, 9); cout << "0 %";
+	gotoXY(80, 9); cout << "100 %";
+	gotoXY(35, 10);
+	for (int i(1); i <= 25; i++)
 	{
-		gotoXY(58, 8);
-		for (int i(1); i <= 5; i++)
-		{
-			cout << ".";
-			Sleep(100);
-		}
-		gotoXY(58, 8);
-		for (int i(1); i <= 5; i++)
-		{
-			cout << " ";
-		}
+		cout << char(219);
+		Sleep(10);
 	}
+	for (int i(1); i <= 25; i++)
+	{
+		cout << char(219);
+		Sleep(100);
+	}
+	
 	system("cls");
 	if (turn == 1) first = "X";
 	else if (turn == 2) first = "O";
