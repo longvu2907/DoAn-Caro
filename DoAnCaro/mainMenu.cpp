@@ -11,7 +11,7 @@ int sfx = 1;
 
 void mainMenu()
 {
-	if (music == 2)  PlaySound(TEXT("nhoinhoi2.wav"), NULL, SND_ASYNC);
+	if (music == 2)  PlaySound(TEXT("nhoinhoi2.wav"), NULL, SND_ASYNC|SND_LOOP);
 	else if(music == 1) PlaySound(TEXT("nhoinhoi1.wav"), NULL, SND_ASYNC);
 	else PlaySound(TEXT("none.wav"), NULL, SND_ASYNC);
 	system("cls");
@@ -352,7 +352,7 @@ void Setting(int& color, int& music, int& mode, int& sfx)
 	int n(1);
 	system("cls");
 	gotoXY(45, 9); cout << "COLOR:";
-	gotoXY(45, 10); cout << "SOUND:";
+	gotoXY(45, 10); cout << "MUSIC:";
 	gotoXY(55, 10);
 	if (music == 2)
 	{
@@ -419,7 +419,7 @@ void Setting(int& color, int& music, int& mode, int& sfx)
 			gotoXY(45, 11); cout << "SFX:";
 			gotoXY(45, 12); cout << "MODE:";
 			gotoXY(55, 9);
-			if (n == 1)
+			if (color == Cyan)
 			{
 				cout << char(174);
 				Textcolor(Cyan);
@@ -427,7 +427,7 @@ void Setting(int& color, int& music, int& mode, int& sfx)
 				Textcolor(White);
 				cout << char(175);
 			}
-			else if (n == 2)
+			else if (color == Green)
 			{
 				cout << char(174);
 				Textcolor(Green);
@@ -435,7 +435,7 @@ void Setting(int& color, int& music, int& mode, int& sfx)
 				Textcolor(White);
 				cout << char(175);
 			}
-			else if (n == 3)
+			else if (color == Blue)
 			{
 				cout << char(174);
 				Textcolor(Blue);
@@ -443,7 +443,7 @@ void Setting(int& color, int& music, int& mode, int& sfx)
 				Textcolor(White);
 				cout << char(175);
 			}
-			else if (n == 4)
+			else if (color == Red)
 			{
 				cout << char(174);
 				Textcolor(Red);
@@ -451,7 +451,7 @@ void Setting(int& color, int& music, int& mode, int& sfx)
 				Textcolor(White);
 				cout << char(175);
 			}
-			else if (n == 5)
+			else if (color == Pink)
 			{
 				cout << char(174);
 				Textcolor(Pink);
@@ -459,7 +459,7 @@ void Setting(int& color, int& music, int& mode, int& sfx)
 				Textcolor(White);
 				cout << char(175);
 			}
-			else if (n == 6)
+			else if (color == Yellow)
 			{
 				cout << char(174);
 				Textcolor(Yellow);
@@ -472,29 +472,29 @@ void Setting(int& color, int& music, int& mode, int& sfx)
 			switch (value)
 			{
 			case 100:
-				if (n < 6) n++;
+				if (color < 14) color++;
 				break;
 			case 97:
-				if (n > 1) n--;
+				if (color > 9) color--;
 				break;
 			case -32:
 				value = _getch();
 				if (value == 77)
 				{
-					if (n < 6) n++;
+					if (color < 14) color++;
 				}
 				else if (value == 75)
 				{
-					if (n > 1) n--;
+					if (color > 9) color--;
 				}
 				break;
 			case 13:
-				if (n == 1) color = Cyan;
-				else if (n == 2) color = Green;
-				else if (n == 3) color = Blue;
-				else if (n == 4)  color = Red;
-				else if (n == 5) color = Pink;
-				else if (n == 6)  color = Yellow;
+				if (color == 9) color = Blue;
+				else if (color == 10) color = Green;
+				else if (color == 11) color = Cyan;
+				else if (color == 12)  color = Red;
+				else if (color == 13) color = Pink;
+				else if (color == 14)  color = Yellow;
 				mainMenu();
 			}
 		}

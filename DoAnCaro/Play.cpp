@@ -225,12 +225,12 @@ void tickXO(int x, int y, int& turn, int sfx)
 
 	if (a[x][y] == 1 || a[x][y] == 2)
 	{
-		if (sfx == 1) PlaySound(TEXT("error.wav"), NULL, SND_ASYNC);
+		if (sfx == 1) PlaySound(TEXT("error.wav"), NULL, SND_SYNC);
 		return;
 	}
 	else if (turn == 1)
 	{
-		if (sfx == 1) PlaySound(TEXT("tickX.wav"), NULL, SND_ASYNC);
+		if (sfx == 1) PlaySound(TEXT("tickX.wav"), NULL, SND_SYNC);
 		a[x][y] = 1;
 		Textcolor(Red);
 		cout << "X";
@@ -238,7 +238,7 @@ void tickXO(int x, int y, int& turn, int sfx)
 	}
 	else if (turn== 2)
 	{
-		if (sfx == 1) PlaySound(TEXT("tickO.wav"), NULL, SND_ASYNC);
+		if (sfx == 1) PlaySound(TEXT("tickO.wav"), NULL, SND_SYNC);
 		a[x][y] = 2;
 		Textcolor(Blue);
 		cout << "O";
