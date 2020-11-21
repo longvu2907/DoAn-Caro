@@ -4,17 +4,32 @@
 char k;
 int value;
 char name1, name2;
-int color = Cyan;
-int mode = 1;
-int music = 2;
-int sfx = 1;
+int color ;
+int mode ;
+int music ;
+int sfx ;
+
+void writeSetting(int color, int music, int sfx, int mode)
+{
+	ofstream f("setting.txt");
+	f << color << " " << music << " " << sfx << " " << mode;
+	f.close();
+}
+void readSetting(int& color, int& music, int& sfx, int& mode)
+{
+	ifstream f("setting.txt");
+	f >> color >> music >> sfx >> mode ;
+	f.close();
+}
 
 void mainMenu()
 {
+	system("cls");
+	readSetting(color, music, sfx, mode);
 	if (music == 2)  PlaySound(TEXT("nhoinhoi2.wav"), NULL, SND_ASYNC|SND_LOOP);
 	else if(music == 1) PlaySound(TEXT("nhoinhoi1.wav"), NULL, SND_ASYNC);
 	else PlaySound(TEXT("none.wav"), NULL, SND_ASYNC);
-	system("cls");
+	
 	int x(51), y(7);
 	AnConTro();	
 	gotoXY(x, y);
@@ -372,7 +387,6 @@ void Setting(int& color, int& music, int& mode, int& sfx)
 		cout << "   OFF   ";
 		cout << char(175);
 	}
-
 	gotoXY(45, 11);  cout << "SFX:";
 	gotoXY(55, 11);
 	if (sfx == 1)
@@ -410,6 +424,7 @@ void Setting(int& color, int& music, int& mode, int& sfx)
 	gotoXY(45, 9);
 	while (1)
 	{
+		writeSetting(color, music, sfx, mode);
 		if (y == 9)
 		{
 			Textcolor(color);

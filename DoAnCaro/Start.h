@@ -6,6 +6,7 @@
 #include <random>
 #include <time.h>
 #include <string>
+#include <fstream>
 #include "mainMenu.h"
 #include "Play.h"
 #include "Color.h"
