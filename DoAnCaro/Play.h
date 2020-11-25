@@ -11,3 +11,5 @@ void resetBoard();
 void Init(int);
 void AnConTro();
 void HienConTro();
+void Continue();
+void Savegame(int, int, int, int);

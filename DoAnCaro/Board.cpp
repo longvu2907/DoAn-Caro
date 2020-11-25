@@ -1,11 +1,11 @@
 #include "Board.h"
 
-void DrawBoard(int k1, int k2, int set,int mode)
-{	
+void DrawBoard(int k1, int k2, int set, int mode)
+{
 	system("cls");
-	gotoXY(51, 7); 
+	gotoXY(51, 7);
 	if (k1 == (mode - 1) || k2 == (mode - 1))
-	{ 
+	{
 		cout << "MATCH POINT";
 		Sleep(1000);
 		system("cls");
@@ -45,8 +45,8 @@ void DrawBoard(int k1, int k2, int set,int mode)
 	cout << char(188);
 	Sleep(1);
 	//Bot Line
-	for (int i(50),k(1); i >3; i--,k++)
-	{	
+	for (int i(50), k(1); i > 3; i--, k++)
+	{
 		if (k == 4)
 		{
 			gotoXY(i, 27);
@@ -56,14 +56,14 @@ void DrawBoard(int k1, int k2, int set,int mode)
 			continue;
 		}
 		gotoXY(i, 27);
-		cout << char(205);	
+		cout << char(205);
 		Sleep(10);
 	}
 	gotoXY(3, 27);
 	cout << char(200);
 	Sleep(1);
 	//Left Line
-	for (int i(26); i >3; i--) 
+	for (int i(26); i > 3; i--)
 	{
 		if (i % 2 != 0)
 		{
@@ -102,13 +102,13 @@ void DrawBoard(int k1, int k2, int set,int mode)
 			}
 		}
 	}
-	gotoXY(25, 2); 
+	gotoXY(25, 2);
 	Textcolor(Red);
 	cout << k1;
 	Textcolor(White);
 	cout << " - ";
 	Textcolor(Blue);
-	cout<< k2;
+	cout << k2;
 	Textcolor(White);
 	gotoXY(3, 2); cout << "Turn: ";
 	FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));

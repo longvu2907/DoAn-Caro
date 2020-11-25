@@ -4,13 +4,14 @@ int a[60][60] = {};
 
 void Play(int& k1, int& k2, int& set, int mode, int turn, int color, int sfx)
 {
-	HienConTro();
+	
 	char k;
 	int value;
 	int x(5), y(4);
-	gotoXY(x, y); 
 	while (1)
-	{
+	{	
+		HienConTro();
+		gotoXY(5, 4); 
 		oTurn(x,y,turn);
 		k = _getch();
 		value = k;
@@ -308,6 +309,7 @@ void Play(int& k1, int& k2, int& set, int mode, int turn, int color, int sfx)
 		}
 		else if (value == 27)
 		{
+			AnConTro();
 			system("cls");
 			x = 47;
 			y = 10;
@@ -378,9 +380,14 @@ void Play(int& k1, int& k2, int& set, int mode, int turn, int color, int sfx)
 				}
 				else if (13)
 				{
-					if (y == 10) break;
+					if (y == 10) {
+						
+						DrawBoard(k1, k2, set, mode); 
+						Continue();
+						Play(k1, k2, set, mode, turn, color, sfx);
+					}
 					else if (y == 11) mainMenu();
-					else if (y == 12) LoadGame();
+					else if (y == 12) Savegame(k1, k2, set, turn);
 					else if (y == 13) exit(0);
 				}				
 			}
@@ -405,7 +412,7 @@ void tickXO(int x, int y, int& turn, int sfx)
 		cout << "X";
 		turn = swapTurn(turn);
 	}
-	else if (turn== 2)
+	else if (turn == 2)
 	{
 		if (sfx == 1) PlaySound(TEXT("tickO.wav"), NULL, SND_SYNC);
 		FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
@@ -449,7 +456,7 @@ int checkXO(int sfx)
 					return 1;
 				}
 			}
-			else if (a[i][j] == 1 && a[i][j + 2] == 1 && a[i][j + 4] == 1 && a[i][j + 6] == 1 && a[i][j + 8] == 1) 
+			else if (a[i][j] == 1 && a[i][j + 2] == 1 && a[i][j + 4] == 1 && a[i][j + 6] == 1 && a[i][j + 8] == 1)
 			{
 				if (a[i][j - 2] == 2 && a[i][j + 10] == 2) { check = 0; }
 				else
@@ -501,7 +508,7 @@ int checkXO(int sfx)
 					return 1;
 				}
 			}
-			else if (a[i][j] == 1 && a[i + 4][j - 2] == 1 && a[i + 8][j - 4] == 1 && a[i + 12][j - 6] == 1 && a[i + 16][j - 8] == 1) 
+			else if (a[i][j] == 1 && a[i + 4][j - 2] == 1 && a[i + 8][j - 4] == 1 && a[i + 12][j - 6] == 1 && a[i + 16][j - 8] == 1)
 			{
 				if (a[i - 4][j + 2] == 2 && a[i + 20][j - 10] == 2) { check = 0; }
 				else
@@ -553,33 +560,33 @@ int checkXO(int sfx)
 					return 2;
 				}
 			}
-			else if (a[i][j] == 2 && a[i][j + 2] == 2 && a[i][j + 4] == 2  && a[i][j + 6] == 2 && a[i][j + 8] == 2) 
+			else if (a[i][j] == 2 && a[i][j + 2] == 2 && a[i][j + 4] == 2 && a[i][j + 6] == 2 && a[i][j + 8] == 2)
 			{
 				if (a[i][j - 2] == 1 && a[i][j + 10] == 1) { check = 0; }
 				else
 				{
-				if (sfx == 1) PlaySound(TEXT("win.wav"), NULL, SND_ASYNC);
-				AnConTro();
-				for (int k(1); k <= 5; k++)
-				{
-					gotoXY(i, j); cout << " ";
-					gotoXY(i, j + 2); cout << " ";
-					gotoXY(i, j + 4); cout << " ";
-					gotoXY(i, j + 6); cout << " ";
-					gotoXY(i, j + 8); cout << " ";
-					Sleep(100);
-					gotoXY(i, j); cout << "O";
-					gotoXY(i, j + 2); cout << "O";
-					gotoXY(i, j + 4); cout << "O";
-					gotoXY(i, j + 6); cout << "O";
-					gotoXY(i, j + 8); cout << "O";
-					Sleep(100);
-				}
-				HienConTro();
-				return 2;
+					if (sfx == 1) PlaySound(TEXT("win.wav"), NULL, SND_ASYNC);
+					AnConTro();
+					for (int k(1); k <= 5; k++)
+					{
+						gotoXY(i, j); cout << " ";
+						gotoXY(i, j + 2); cout << " ";
+						gotoXY(i, j + 4); cout << " ";
+						gotoXY(i, j + 6); cout << " ";
+						gotoXY(i, j + 8); cout << " ";
+						Sleep(100);
+						gotoXY(i, j); cout << "O";
+						gotoXY(i, j + 2); cout << "O";
+						gotoXY(i, j + 4); cout << "O";
+						gotoXY(i, j + 6); cout << "O";
+						gotoXY(i, j + 8); cout << "O";
+						Sleep(100);
+					}
+					HienConTro();
+					return 2;
 				}
 			}
-			else if (a[i][j] == 2 && a[i + 4][j + 2] == 2 && a[i + 8][j + 4] == 2 && a[i + 12][j + 6] == 2 && a[i + 16][j + 8] == 2) 
+			else if (a[i][j] == 2 && a[i + 4][j + 2] == 2 && a[i + 8][j + 4] == 2 && a[i + 12][j + 6] == 2 && a[i + 16][j + 8] == 2)
 			{
 				if (a[i - 4][j - 2] == 1 && a[i + 20][j + 10] == 1) { check = 0; }
 				else
@@ -605,7 +612,7 @@ int checkXO(int sfx)
 					return 2;
 				}
 			}
-			else if (a[i][j] == 2 && a[i + 4][j - 2] == 2 && a[i + 8][j - 4] == 2 && a[i + 12][j - 6] == 2 && a[i + 16][j - 8] == 2) 
+			else if (a[i][j] == 2 && a[i + 4][j - 2] == 2 && a[i + 8][j - 4] == 2 && a[i + 12][j - 6] == 2 && a[i + 16][j - 8] == 2)
 			{
 				if (a[i - 4][j + 2] == 1 && a[i + 20][j - 10] == 1) { check = 0; }
 				else
@@ -634,15 +641,52 @@ int checkXO(int sfx)
 			else check = 0;
 		}
 	}
-	for (int i(5),c(0); i <= 49; i += 4)
+	for (int i(5), c(0); i <= 49; i += 4)
 	{
 		for (int j(4); j <= 26; j += 2)
 		{
 			if (a[i][j] != 0) c++;
 		}
 		if (c == 144) return 3;
-	}	
+	}
 	return check;
+}
+void Continue()
+{
+	for (int i(5); i <= 49; i += 4)
+	{
+		for (int j(4); j <= 26; j += 2)
+		{
+			if (a[i][j] == 1)
+			{
+				gotoXY(i, j);
+				Textcolor(Red);
+				cout << "X";
+				Textcolor(White);
+			}
+			else if (a[i][j] == 2)
+			{
+				gotoXY(i, j);
+				Textcolor(Blue);
+				cout << "O";
+				Textcolor(White);
+			}
+		}
+	}
+}
+void Savegame(int k1,int k2,int set,int turn)
+{
+	ofstream f("Loadgame.txt");
+	f << k1 << " " << k2 << " " << set << " " << turn << endl;
+	for (int i(5); i <= 49; i += 4)
+	{
+		for (int j(4); j <= 26; j += 2)
+		{
+			f << a[i][j] << " ";
+		}
+		f << endl;
+	}
+	f.close();
 }
 
 void resetBoard()
@@ -693,3 +737,4 @@ void HienConTro()
 	Info.dwSize = 20;
 	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &Info);
 }
+

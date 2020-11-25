@@ -8,6 +8,7 @@ int color ;
 int mode ;
 int music ;
 int sfx ;
+string p1, p2;
 
 void writeSetting(int color, int music, int sfx, int mode)
 {
@@ -20,6 +21,14 @@ void readSetting(int& color, int& music, int& sfx, int& mode)
 	ifstream f("setting.txt");
 	f >> color >> music >> sfx >> mode ;
 	f.close();
+}
+void Name(string p1, string p2)
+{
+	system("cls");
+	gotoXY(40, 7);
+	cout << "NHAP TEN PLAYER 1: "; cin >> p1;
+	gotoXY(40, 9);
+	cout << "NHAP TEN PLAYER 2: "; cin >> p2;
 }
 
 void mainMenu()
@@ -164,6 +173,7 @@ void mainMenu()
 void NewGame(int k1, int k2 ,int set,int mode)
 {
 	int turn = initTurn();
+	Name(p1, p2);
 	Init(turn);
 	DrawBoard(k1, k2, set, mode);
 	resetBoard();
@@ -172,19 +182,20 @@ void NewGame(int k1, int k2 ,int set,int mode)
 
 void LoadGame()
 {
-	system("cls");
-	gotoXY(35, 9); cout << "0 %";
-	gotoXY(80, 9); cout << "100 %";
-	gotoXY(35, 10);
-	for (int i(1); i <= 50; i++)
+	int a[60][60];
+	int k1, k2, set, turn;
+	ifstream f("Loadgame.txt");
+	f >> k1 >> k2 >> set >> turn;
+	for (int i(5); i <= 49; i += 4)
 	{
-		cout << char(219);
-		Sleep(100);
+		for (int j(4); j <= 26; j += 2)
+		{
+			f >> a[i][j];
+		}
 	}
-	system("cls");
-	gotoXY(48, 15);
-	cout << "Tinh nang dang phat trien.";
-	if (_getch()) mainMenu();
+	DrawBoard(k1, k2, set, mode);
+	Continue();
+	Play(k1, k2, set, mode, turn, color, sfx);
 }
 
 void NLV()
