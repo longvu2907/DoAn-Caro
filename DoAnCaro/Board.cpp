@@ -1,6 +1,6 @@
 #include "Board.h"
 
-void DrawBoard(int k1, int k2, int set, int mode)
+void DrawBoard(int k1, int k2, int set, int mode, string p1, string p2)
 {
 	system("cls");
 	gotoXY(51, 7);
@@ -102,13 +102,15 @@ void DrawBoard(int k1, int k2, int set, int mode)
 			}
 		}
 	}
-	gotoXY(25, 2);
+	gotoXY(30, 2);
 	Textcolor(Red);
+	cout << p1 << " ";
 	cout << k1;
 	Textcolor(White);
 	cout << " - ";
 	Textcolor(Blue);
 	cout << k2;
+	cout << " "<< p2;
 	Textcolor(White);
 	gotoXY(3, 2); cout << "Turn: ";
 	FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));

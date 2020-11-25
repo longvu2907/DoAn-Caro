@@ -12,23 +12,34 @@ int swapTurn(int turn)
 	else turn = 1;
 	return turn;
 }
-void oTurn(int x,int y,int turn)
+void oTurn(int x,int y,int turn, string p1, string p2)
 {
 	if (turn == 1)
 	{
 		AnConTro();
+		gotoXY(9, 2);
+		for (int i = 1; i <= 15; i++)
+		{
+			
+			cout << " ";
+		}
 		Textcolor(Red);
 		gotoXY(9, 2);
-		cout << "X";
+		cout << p1;
 		gotoXY(x, y);
 		HienConTro();
 	}
 	else
 	{
+		gotoXY(9, 2);
+		for (int i = 1; i <= 15; i++)
+		{
+			cout << " ";
+		}
 		AnConTro();
 		Textcolor(Blue);
 		gotoXY(9, 2);
-		cout << "O";
+		cout << p2;
 		gotoXY(x, y);
 		HienConTro();
 	}

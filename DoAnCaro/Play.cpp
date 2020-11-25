@@ -2,7 +2,7 @@
 
 int a[60][60] = {};
 
-void Play(int& k1, int& k2, int& set, int mode, int turn, int color, int sfx)
+void Play(int& k1, int& k2, int& set, int mode, int turn, int color, int sfx, string p1, string p2)
 {
 	
 	char k;
@@ -12,7 +12,7 @@ void Play(int& k1, int& k2, int& set, int mode, int turn, int color, int sfx)
 	{	
 		HienConTro();
 		gotoXY(5, 4); 
-		oTurn(x,y,turn);
+		oTurn(x,y,turn,p1,p2);
 		k = _getch();
 		value = k;
 		if (value == -32 )
@@ -78,7 +78,7 @@ void Play(int& k1, int& k2, int& set, int mode, int turn, int color, int sfx)
 					AnConTro();
 					gotoXY(47, 7);
 					Textcolor(Red);
-					cout << "PLAYER X WIN !!!!";
+					cout << p1 <<" WIN !!!!";
 					Textcolor(White);
 					x = 47;
 					y = 10;
@@ -139,9 +139,9 @@ void Play(int& k1, int& k2, int& set, int mode, int turn, int color, int sfx)
 				}
 				
 				set++;
-				DrawBoard(k1, k2, set, mode);
+				DrawBoard(k1, k2, set, mode, p1, p2);
 				resetBoard();
-				Play(k1, k2, set, mode, turn, color, sfx);
+				Play(k1, k2, set, mode, turn, color, sfx, p1, p2);
 			}
 			else if (checkXO(sfx) == 2)
 			{
@@ -153,7 +153,7 @@ void Play(int& k1, int& k2, int& set, int mode, int turn, int color, int sfx)
 					AnConTro();
 					gotoXY(47, 7);
 					Textcolor(Blue);
-					cout << "PLAYER O WIN !!!!";
+					cout << p2 << " WIN !!!!";
 					Textcolor(White);
 					x = 47;
 					y = 10;
@@ -213,9 +213,9 @@ void Play(int& k1, int& k2, int& set, int mode, int turn, int color, int sfx)
 					}
 				}			
 				set++;
-				DrawBoard(k1, k2, set, mode);
+				DrawBoard(k1, k2, set, mode, p1, p2);
 				resetBoard();
-				Play(k1, k2, set, mode, turn, color, sfx);
+				Play(k1, k2, set, mode, turn, color, sfx, p1, p2);
 			}
 			else if (checkXO(sfx) == 3)
 			{
@@ -302,9 +302,9 @@ void Play(int& k1, int& k2, int& set, int mode, int turn, int color, int sfx)
 				}
 			}
 			set++;
-			DrawBoard(k1, k2, set, mode);
+			DrawBoard(k1, k2, set, mode, p1 ,p2);
 			resetBoard();
-			Play(k1, k2, set, mode, turn, color, sfx);
+			Play(k1, k2, set, mode, turn, color, sfx, p1, p2);
 			}
 		}
 		else if (value == 27)
@@ -382,9 +382,9 @@ void Play(int& k1, int& k2, int& set, int mode, int turn, int color, int sfx)
 				{
 					if (y == 10) {
 						
-						DrawBoard(k1, k2, set, mode); 
+						DrawBoard(k1, k2, set, mode, p1 ,p2); 
 						Continue();
-						Play(k1, k2, set, mode, turn, color, sfx);
+						Play(k1, k2, set, mode, turn, color, sfx, p1, p2);
 					}
 					else if (y == 11) mainMenu();
 					else if (y == 12) Savegame(k1, k2, set, turn);
@@ -699,7 +699,7 @@ void resetBoard()
 		}
 	}
 }
-void Init(int turn)
+void Init(int turn, string p1, string p2)
 {
 	string first;
 	system("cls");
@@ -718,9 +718,9 @@ void Init(int turn)
 	}
 	
 	system("cls");
-	if (turn == 1) first = "X";
-	else if (turn == 2) first = "O";
-	gotoXY(46, 8); cout << "PLAYER " << first << " GO FIRST";
+	if (turn == 1) first = p1;
+	else if (turn == 2) first = p2;
+	gotoXY(46, 8); cout << first << " GO FIRST";
 	Sleep(1500);
 }
 void AnConTro()

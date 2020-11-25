@@ -22,13 +22,13 @@ void readSetting(int& color, int& music, int& sfx, int& mode)
 	f >> color >> music >> sfx >> mode ;
 	f.close();
 }
-void Name(string p1, string p2)
+void Name(string& p1, string& p2)
 {
 	system("cls");
 	gotoXY(40, 7);
-	cout << "NHAP TEN PLAYER 1: "; cin >> p1;
+	cout << "NAME'S PLAYER 1: "; cin >> p1;
 	gotoXY(40, 9);
-	cout << "NHAP TEN PLAYER 2: "; cin >> p2;
+	cout << "NAME'S PLAYER 2: "; cin >> p2;
 }
 
 void mainMenu()
@@ -174,10 +174,10 @@ void NewGame(int k1, int k2 ,int set,int mode)
 {
 	int turn = initTurn();
 	Name(p1, p2);
-	Init(turn);
-	DrawBoard(k1, k2, set, mode);
+	Init(turn, p1 ,p2);
+	DrawBoard(k1, k2, set, mode, p1, p2);
 	resetBoard();
-	Play(k1, k2, set, mode, turn, color, sfx);
+	Play(k1, k2, set, mode, turn, color, sfx, p1, p2);
 }
 
 void LoadGame()
@@ -193,9 +193,9 @@ void LoadGame()
 			f >> a[i][j];
 		}
 	}
-	DrawBoard(k1, k2, set, mode);
+	DrawBoard(k1, k2, set, mode, p1, p2);
 	Continue();
-	Play(k1, k2, set, mode, turn, color, sfx);
+	Play(k1, k2, set, mode, turn, color, sfx, p1, p2);
 }
 
 void NLV()
