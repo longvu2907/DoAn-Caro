@@ -195,23 +195,17 @@ void LoadGame()
 	Play(k1, k2, set, mode, turn, color, sound, p1, p2);
 }
 
-void NLV()
+void NHOM1()
 {
-	gotoXY(53, 3); cout << "CONTACT FOR WORK:";
-	gotoXY(48, 7); cout << "NGUYEN LONG VU";
-	gotoXY(48, 8); cout << "PHONE: 0356436545";
-	gotoXY(48, 9); cout << "GMAIL: longvu2907@gmail.com";
-	gotoXY(48, 10); cout << "FB: fb.com/longvu2907"; 
+	gotoXY(47, 3); cout << "NGUYEN PHUC THUAN";
+	gotoXY(50, 4); cout << "MSSV:20120380";
+	gotoXY(45, 6); cout << "DANG VO HOANG KIM TUYEN";
+	gotoXY(50, 7); cout << "MSSV:20120399";
+	gotoXY(48, 9); cout << "NGUYEN LONG VU";
+	gotoXY(50, 10); cout << "MSSV:20120405";
+	gotoXY(48, 12); cout << "TRAN THANH TUNG";
+	gotoXY(50, 13); cout << "MSSV:20120409";
 	
-}
-void TTT()
-{
-	gotoXY(53, 3); cout << "CONTACT FOR WORK:";
-	gotoXY(48, 7); cout << "TRUONG TOAN THINH";
-	gotoXY(48, 8); cout << "PHONE: ";
-	gotoXY(48, 9); cout << "GMAIL: ttthinh@fit.hcmus.edu.vn";
-	gotoXY(48, 10); cout << "FB: ";
-
 }
 void About()
 {
@@ -221,34 +215,20 @@ void About()
 	{
 		if (y == 7)
 		{
-			gotoXY(53, 3); cout << "ABOUT";
+			gotoXY(52, 3); cout << "ABOUT";
 			Textcolor(color);
-			gotoXY(48, 7); cout << "NGUYEN LONG VU";
+			gotoXY(52, 7); cout << "NHOM 1";
 			Textcolor(White);
 			gotoXY(52, 8); cout << "20CTT3";
-			gotoXY(48, 9); cout << "MSSV: 20120405";
 			gotoXY(46, 10); cout << "GIAO VIEN HUONG DAN ";
 			gotoXY(47, 11); cout << "TRUONG TOAN THINH";
-			gotoXY(53, 15); cout << "BACK";
-		}
-		else if (y == 11)
-		{
-			gotoXY(53, 3); cout << "ABOUT";
-			gotoXY(48, 7); cout << "NGUYEN LONG VU";
-			gotoXY(52, 8); cout << "20CTT3";
-			gotoXY(48, 9); cout << "MSSV: 20120405";
-			gotoXY(46, 10); cout << "GIAO VIEN HUONG DAN ";
-			Textcolor(color);
-			gotoXY(47, 11); cout << "TRUONG TOAN THINH";
-			Textcolor(White);
 			gotoXY(53, 15); cout << "BACK";
 		}
 		else if (y == 15)
 		{
-			gotoXY(53, 3); cout << "ABOUT";
-			gotoXY(48, 7); cout << "NGUYEN LONG VU";
+			gotoXY(52, 3); cout << "ABOUT";
+			gotoXY(52, 7); cout << "NHOM 1";
 			gotoXY(52, 8); cout << "20CTT3";
-			gotoXY(48, 9); cout << "MSSV: 20120405";
 			gotoXY(46, 10); cout << "GIAO VIEN HUONG DAN ";
 			gotoXY(47, 11); cout << "TRUONG TOAN THINH";
 			Textcolor(color);
@@ -261,10 +241,10 @@ void About()
 		switch (value)
 		{
 		case 119:
-			if (y > 7) { y -= 4; gotoXY(x, y); }
+			if (y > 7) { y -= 8; gotoXY(x, y); }
 			break;
 		case 115:
-			if (y < 15) { y += 4; gotoXY(x, y); }
+			if (y < 15) { y += 8; gotoXY(x, y); }
 			break;
 		case -32:
 			value = _getch();
@@ -283,21 +263,12 @@ void About()
 			if (y == 7)
 			{
 				system("cls");
-				NLV();
+				NHOM1();
 				while (_getch())
 				{
 					About();
 				}
-			}
-			if (y == 11)
-			{
-				system("cls");
-				TTT();
-				while (_getch())
-				{
-					About();
-				}
-			}
+			}	
 			if (y == 15)
 			{
 				mainMenu();
