@@ -6,20 +6,19 @@ int value;
 char name1, name2;
 int color ;
 int mode ;
-int music ;
-int sfx ;
+int sound;
 string p1, p2;
 
-void writeSetting(int color, int music, int sfx, int mode)
+void writeSetting(int color, int sound, int mode)
 {
 	ofstream f("setting.txt");
-	f << color << " " << music << " " << sfx << " " << mode;
+	f << color << " " << sound << " " << mode;
 	f.close();
 }
-void readSetting(int& color, int& music, int& sfx, int& mode)
+void readSetting(int& color, int& sound, int& mode)
 {
 	ifstream f("setting.txt");
-	f >> color >> music >> sfx >> mode ;
+	f >> color >> sound >> mode ;
 	f.close();
 }
 void Name(string& p1, string& p2)
@@ -34,11 +33,9 @@ void Name(string& p1, string& p2)
 void mainMenu()
 {
 	system("cls");
-	readSetting(color, music, sfx, mode);
-	if (music == 2)  PlaySound(TEXT("nhoinhoi2.wav"), NULL, SND_ASYNC|SND_LOOP);
-	else if(music == 1) PlaySound(TEXT("nhoinhoi1.wav"), NULL, SND_ASYNC);
-	else PlaySound(TEXT("none.wav"), NULL, SND_ASYNC);
-	
+	readSetting(color, sound, mode);
+	if (sound == 1)  PlaySound(TEXT("nhacnen.wav"), NULL, SND_ASYNC | SND_LOOP);
+	else;
 	int x(51), y(7);
 	AnConTro();	
 	gotoXY(x, y);
@@ -140,8 +137,8 @@ void mainMenu()
 			}
 			break;
 		case 13:
-			if (sfx == 1) PlaySound(TEXT("button.wav"), NULL, SND_ASYNC);
-			else PlaySound(TEXT("none.wav"), NULL, SND_ASYNC);
+			if (sound == 1) PlaySound(TEXT("button.wav"), NULL, SND_ASYNC);
+			else;
 			if (y == 7)
 			{
 				int k1(0), k2(0), set(1);
@@ -154,7 +151,7 @@ void mainMenu()
 			}
 			else if (y == 10)
 			{
-				Setting(color, music, mode, sfx);
+				Setting(color, sound, mode);
 				mainMenu();
 			}
 			else if (y == 11)
@@ -177,7 +174,7 @@ void NewGame(int k1, int k2 ,int set,int mode)
 	Init(turn, p1 ,p2);
 	DrawBoard(k1, k2, set, mode, p1, p2);
 	resetBoard();
-	Play(k1, k2, set, mode, turn, color, sfx, p1, p2);
+	Play(k1, k2, set, mode, turn, color, sound, p1, p2);
 }
 
 void LoadGame()
@@ -195,7 +192,7 @@ void LoadGame()
 	}
 	DrawBoard(k1, k2, set, mode, p1, p2);
 	Continue();
-	Play(k1, k2, set, mode, turn, color, sfx, p1, p2);
+	Play(k1, k2, set, mode, turn, color, sound, p1, p2);
 }
 
 void NLV()
@@ -372,7 +369,7 @@ int Mode()
 	}
 }
 
-void Setting(int& color, int& music, int& mode, int& sfx)
+void Setting(int& color, int& sound, int& mode)
 {
 	int x(45), y(9);
 	int n(1);
@@ -380,40 +377,20 @@ void Setting(int& color, int& music, int& mode, int& sfx)
 	gotoXY(45, 9); cout << "COLOR:";
 	gotoXY(45, 10); cout << "MUSIC:";
 	gotoXY(55, 10);
-	if (music == 2)
-	{
-		cout << char(174);
-		cout << "   100%  ";
-		cout << char(175);
-	}
-	else if (music == 1)
-	{
-		cout << char(174);
-		cout << "   50%   ";
-		cout << char(175);
-	}
-	else if (music == 0)
-	{
-		cout << char(174);
-		cout << "   OFF   ";
-		cout << char(175);
-	}
-	gotoXY(45, 11);  cout << "SFX:";
-	gotoXY(55, 11);
-	if (sfx == 1)
+	if (sound == 1)
 	{
 		cout << char(174);
 		cout << "   ON    ";
 		cout << char(175);
 	}
-	else if (sfx == 0)
+	else if (sound == 0)
 	{
 		cout << char(174);
 		cout << "   OFF   ";
 		cout << char(175);
 	}
-	gotoXY(45, 12); cout << "MODE:";
-	gotoXY(55, 12);
+	gotoXY(45, 11); cout << "MODE:";
+	gotoXY(55, 11);
 	if (mode == 1)
 	{
 		cout << char(174);
@@ -435,15 +412,14 @@ void Setting(int& color, int& music, int& mode, int& sfx)
 	gotoXY(45, 9);
 	while (1)
 	{
-		writeSetting(color, music, sfx, mode);
+		writeSetting(color, sound, mode);
 		if (y == 9)
 		{
 			Textcolor(color);
 			gotoXY(45, 9); cout << "COLOR:";
 			Textcolor(White);
-			gotoXY(45, 10); cout << "MUSIC:";
-			gotoXY(45, 11); cout << "SFX:";
-			gotoXY(45, 12); cout << "MODE:";
+			gotoXY(45, 10); cout << "SOUND:";
+			gotoXY(45, 11); cout << "MODE:";
 			gotoXY(55, 9);
 			if (color == Cyan)
 			{
@@ -528,24 +504,17 @@ void Setting(int& color, int& music, int& mode, int& sfx)
 		{
 			gotoXY(45, 9); cout << "COLOR:";
 			Textcolor(color);
-			gotoXY(45, 10);	cout << "MUSIC:";
+			gotoXY(45, 10);	cout << "SOUND:";
 			Textcolor(White);
-			gotoXY(45, 11); cout << "SFX:";
-			gotoXY(45, 12); cout << "MODE:";
+			gotoXY(45, 11); cout << "MODE:";
 			gotoXY(55, 10);
-			if (music == 2)
+			if (sound == 1)
 			{
 				cout << char(174);
-				cout << "   100%  ";
+				cout << "   ON    ";
 				cout << char(175);
 			}
-			else if (music == 1)
-			{
-				cout << char(174);
-				cout << "   50%   ";
-				cout << char(175);
-			}
-			else if (music == 0)
+			else if (sound == 0)
 			{
 				cout << char(174);
 				cout << "   OFF   ";
@@ -556,10 +525,10 @@ void Setting(int& color, int& music, int& mode, int& sfx)
 			switch (value)
 			{
 			case 100:
-				if (music > 0) music--;
+				if (sound > 0) sound--;
 				break;
 			case 97:
-				if (music < 2) music++;
+				if (sound < 1) sound++;
 				break;
 			case -32:
 				value = _getch();
@@ -578,59 +547,12 @@ void Setting(int& color, int& music, int& mode, int& sfx)
 		}
 		else if (y == 11)
 		{
-		gotoXY(45, 9); cout << "COLOR:";
-		gotoXY(45, 10);	cout << "MUSIC:";
-		Textcolor(color);
-		gotoXY(45, 11); cout << "SFX:";
-		Textcolor(White);
-		gotoXY(45, 12); cout << "MODE:";
-		gotoXY(55, 11);
-		if (sfx == 1)
-		{
-			cout << char(174);
-			cout << "   ON    ";
-			cout << char(175);
-		}
-		else if (sfx == 0)
-		{
-			cout << char(174);
-			cout << "   OFF   ";
-			cout << char(175);
-		}
-		k = _getch();
-		value = k;
-		switch (value)
-		{
-		case 100:
-			if (sfx > 0) sfx--;
-			break;
-		case 97:
-			if (sfx < 1) sfx++;
-			break;
-		case -32:
-			value = _getch();
-			if (value == 77)
-			{
-				if (n < 2) n++;
-			}
-			else if (value == 75)
-			{
-				if (n > 1) n--;
-			}
-			break;
-		case 13:
-			mainMenu();
-		}
-		}
-		else if (y == 12)
-		{
 			gotoXY(45, 9); cout << "COLOR:";
-			gotoXY(45, 10);	cout << "MUSIC:";
-			gotoXY(45, 11); cout << "SFX:";
+			gotoXY(45, 10);	cout << "SOUND:";
 			Textcolor(color);
-			gotoXY(45, 12);	cout << "MODE:";
+			gotoXY(45, 11);	cout << "MODE:";
 			Textcolor(White);
-			gotoXY(55, 12);
+			gotoXY(55, 11);
 			if (mode == 1)
 			{
 				cout << char(174);
@@ -680,7 +602,7 @@ void Setting(int& color, int& music, int& mode, int& sfx)
 			if (y > 9) y--;
 			break;
 		case 115:
-			if (y < 12) y++;
+			if (y < 11) y++;
 			break;
 		case -32:
 			value = _getch();
@@ -690,7 +612,7 @@ void Setting(int& color, int& music, int& mode, int& sfx)
 				if (y > 9) y--;
 				break;
 			case 80:
-				if (y < 12) y++;
+				if (y < 11) y++;
 				break;
 			}
 		case 13:
