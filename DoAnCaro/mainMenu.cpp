@@ -1,6 +1,5 @@
 #include "mainMenu.h"
 
-
 char k;
 int value;
 char name1, name2;
@@ -26,15 +25,17 @@ void Name(string& p1, string& p2)
 	system("cls");
 	gotoXY(40, 7);
 	cout << "NAME'S PLAYER 1: "; cin >> p1;
+	transform(p1.begin(), p1.end(), p1.begin(), ::toupper);
 	gotoXY(40, 9);
 	cout << "NAME'S PLAYER 2: "; cin >> p2;
+	transform(p2.begin(), p2.end(), p2.begin(), ::toupper);
 }
 
 void mainMenu()
 {
 	system("cls");
 	readSetting(color, sound, mode);
-	if (sound == 1)  PlaySound(TEXT("nhacnen.wav"), NULL, SND_ASYNC | SND_LOOP);
+	if (sound == 1)  PlaySound(TEXT("Sound/nhacnen.wav"), NULL, SND_ASYNC | SND_LOOP);
 	else;
 	int x(51), y(7);
 	AnConTro();	
@@ -137,7 +138,7 @@ void mainMenu()
 			}
 			break;
 		case 13:
-			if (sound == 1) PlaySound(TEXT("button.wav"), NULL, SND_ASYNC);
+			if (sound == 1) PlaySound(TEXT("Sound/button.wav"), NULL, SND_ASYNC);
 			else;
 			if (y == 7)
 			{
@@ -179,18 +180,69 @@ void NewGame(int k1, int k2 ,int set,int mode)
 
 void LoadGame()
 {
+	system("cls");
+	string listName[10];
+	string name;
 	int a[60][60];
 	int k1, k2, set, turn;
-	ifstream f("Loadgame.txt");
-	f >> k1 >> k2 >> set >> turn;
+	ifstream f("listPlayer.txt");
+	int n = 0;
+	while (getline(f, name))
+	{
+		listName[n] = name;
+		n++;
+	}
+	int choice;
+	int cmd = 10;
+	while (true)
+	{
+		system("cls");
+		for (int i = 0; i < n; i++)
+		{
+			gotoXY(52, i + 10);
+			cout << listName[i];
+		}
+		gotoXY(50, cmd);
+		cout << "->";
+		char key = _getch();
+		if (key == 'w' || key == 'W')
+		{
+			if (cmd > 10)
+			{
+				cmd--;
+			}
+		}
+		else if (key == 's' || key == 'S')
+		{
+			if (cmd < n + 9)
+			{
+				cmd++;
+			}
+		}
+		else if (key == 13)
+		{
+			choice = cmd-10;
+			break;
+		}
+		else if (key == 27)
+		{
+			mainMenu();
+		}
+	}
+	f.close();
+	ifstream fRead("dataPlayer/" + listName[choice] + ".txt");
+	fRead >> k1 >> k2 >> set >> turn;
+	fRead >> p1 >> p2;
 	for (int i(5); i <= 49; i += 4)
 	{
 		for (int j(4); j <= 26; j += 2)
 		{
-			f >> a[i][j];
+			fRead >> a[i][j];
 		}
 	}
+	fRead.close();
 	DrawBoard(k1, k2, set, mode, p1, p2);
+	loadData(a);
 	Continue();
 	Play(k1, k2, set, mode, turn, color, sound, p1, p2);
 }
@@ -591,4 +643,5 @@ void Setting(int& color, int& sound, int& mode)
 		}
 	}
 }
+
 

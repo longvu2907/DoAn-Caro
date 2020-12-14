@@ -2,15 +2,17 @@
 
 int a[60][60] = {};
 
+void Savegame(int, int, int, int, std::string, std::string);
+void playAgain(int, int, int, int, int, int, std::string, std::string);
+
 void Play(int& k1, int& k2, int& set, int mode, int turn, int color, int sound, string p1, string p2)
 {
-	
 	char k;
 	int value;
 	int x(5), y(4);
 	while (1)
 	{	
-		HienConTro();
+		HienConTro(); 
 		gotoXY(5, 4); 
 		oTurn(x,y,turn,p1,p2);
 		k = _getch();
@@ -132,7 +134,7 @@ void Play(int& k1, int& k2, int& set, int mode, int turn, int color, int sound, 
 							break;
 						case 13:
 							if (y == 10) Start();
-							else if (y == 11) NewGame(0, 0, 1, mode);
+							else if (y == 11) playAgain(0, 0, 1, color, sound, mode, p1, p2);
 							else if (y == 12) exit(0);
 						}
 					}
@@ -207,7 +209,7 @@ void Play(int& k1, int& k2, int& set, int mode, int turn, int color, int sound, 
 							break;
 						case 13:
 							if (y == 10) Start();
-							else if (y == 11) NewGame(0, 0, 1, mode);
+							else if (y == 11) playAgain(0, 0, 1, color, sound, mode, p1, p2);
 							else if (y == 12) exit(0);
 						}
 					}
@@ -296,7 +298,7 @@ void Play(int& k1, int& k2, int& set, int mode, int turn, int color, int sound, 
 						break;
 					case 13:
 						if (y == 10) Start();
-						else if (y == 11) NewGame(0, 0, 1, mode);
+						else if (y == 11) playAgain(0, 0, 1, color, sound, mode, p1, p2);
 						else if (y == 12) exit(0);
 					}
 				}
@@ -380,14 +382,13 @@ void Play(int& k1, int& k2, int& set, int mode, int turn, int color, int sound, 
 				}
 				else if (13)
 				{
-					if (y == 10) {
-						
+					if (y == 10) {	
 						DrawBoard(k1, k2, set, mode, p1 ,p2); 
 						Continue();
 						Play(k1, k2, set, mode, turn, color, sound, p1, p2);
 					}
 					else if (y == 11) mainMenu();
-					else if (y == 12) Savegame(k1, k2, set, turn);
+					else if (y == 12) Savegame(k1, k2, set, turn, p1, p2);
 					else if (y == 13) exit(0);
 				}				
 			}
@@ -399,13 +400,13 @@ void tickXO(int x, int y, int& turn, int sound)
 
 	if (a[x][y] == 1 || a[x][y] == 2)
 	{
-		if (sound == 1) PlaySound(TEXT("error.wav"), NULL, SND_SYNC);
+		if (sound == 1) PlaySound(TEXT("Sound/error.wav"), NULL, SND_SYNC);
 		FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
 		return;
 	}
 	else if (turn == 1)
 	{
-		if (sound == 1) PlaySound(TEXT("tickX.wav"), NULL, SND_SYNC);
+		if (sound == 1) PlaySound(TEXT("Sound/tickX.wav"), NULL, SND_SYNC);
 		FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
 		a[x][y] = 1;
 		Textcolor(Red);
@@ -414,7 +415,7 @@ void tickXO(int x, int y, int& turn, int sound)
 	}
 	else if (turn == 2)
 	{
-		if (sound == 1) PlaySound(TEXT("tickO.wav"), NULL, SND_SYNC);
+		if (sound == 1) PlaySound(TEXT("Sound/tickO.wav"), NULL, SND_SYNC);
 		FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
 		a[x][y] = 2;
 		Textcolor(Blue);
@@ -435,7 +436,7 @@ int checkXO(int sound)
 				if (a[i - 4][j] == 2 && a[i + 20][j] == 2) { check = 0; }
 				else
 				{
-					if (sound == 1) PlaySound(TEXT("win.wav"), NULL, SND_ASYNC);
+					if (sound == 1) PlaySound(TEXT("Sound/win.wav"), NULL, SND_ASYNC);
 					AnConTro();
 					for (int k(1); k <= 10; k++)
 					{
@@ -461,7 +462,7 @@ int checkXO(int sound)
 				if (a[i][j - 2] == 2 && a[i][j + 10] == 2) { check = 0; }
 				else
 				{
-					if (sound == 1) PlaySound(TEXT("win.wav"), NULL, SND_ASYNC);
+					if (sound == 1) PlaySound(TEXT("Sound/win.wav"), NULL, SND_ASYNC);
 					AnConTro();
 					for (int k(1); k <= 10; k++)
 					{
@@ -487,7 +488,7 @@ int checkXO(int sound)
 				if (a[i - 4][j - 2] == 2 && a[i + 20][j + 10] == 2) { check = 0; }
 				else
 				{
-					if (sound == 1) PlaySound(TEXT("win.wav"), NULL, SND_ASYNC);
+					if (sound == 1) PlaySound(TEXT("Sound/win.wav"), NULL, SND_ASYNC);
 					AnConTro();
 					for (int k(1); k <= 10; k++)
 					{
@@ -513,7 +514,7 @@ int checkXO(int sound)
 				if (a[i - 4][j + 2] == 2 && a[i + 20][j - 10] == 2) { check = 0; }
 				else
 				{
-					if (sound == 1) PlaySound(TEXT("win.wav"), NULL, SND_ASYNC);
+					if (sound == 1) PlaySound(TEXT("Sound/win.wav"), NULL, SND_ASYNC);
 					AnConTro();
 					for (int k(1); k <= 10; k++)
 					{
@@ -565,7 +566,7 @@ int checkXO(int sound)
 				if (a[i][j - 2] == 1 && a[i][j + 10] == 1) { check = 0; }
 				else
 				{
-					if (sound == 1) PlaySound(TEXT("win.wav"), NULL, SND_ASYNC);
+					if (sound == 1) PlaySound(TEXT("Sound/win.wav"), NULL, SND_ASYNC);
 					AnConTro();
 					for (int k(1); k <= 5; k++)
 					{
@@ -591,7 +592,7 @@ int checkXO(int sound)
 				if (a[i - 4][j - 2] == 1 && a[i + 20][j + 10] == 1) { check = 0; }
 				else
 				{
-					if (sound == 1) PlaySound(TEXT("win.wav"), NULL, SND_ASYNC);
+					if (sound == 1) PlaySound(TEXT("Sound/win.wav"), NULL, SND_ASYNC);
 					AnConTro();
 					for (int k(1); k <= 5; k++)
 					{
@@ -617,7 +618,7 @@ int checkXO(int sound)
 				if (a[i - 4][j + 2] == 1 && a[i + 20][j - 10] == 1) { check = 0; }
 				else
 				{
-					if (sound == 1) PlaySound(TEXT("win.wav"), NULL, SND_ASYNC);
+					if (sound == 1) PlaySound(TEXT("Sound/win.wav"), NULL, SND_ASYNC);
 					AnConTro();
 					for (int k(1); k <= 5; k++)
 					{
@@ -674,21 +675,74 @@ void Continue()
 		}
 	}
 }
-void Savegame(int k1,int k2,int set,int turn)
+void Savegame(int k1, int k2, int set, int turn, string p1, string p2)
 {
-	ofstream f("Loadgame.txt");
-	f << k1 << " " << k2 << " " << set << " " << turn << endl;
+	system("cls");
+	string name;
+	string check;
+	gotoXY(47, 10);
+	cout << "NAME: ";
+	ofstream w("listPlayer.txt", ios::app);
+	ifstream f("listPlayer.txt");
+	cin >> name;
+	transform(name.begin(), name.end(), name.begin(), ::toupper);
+	while (1) {
+		getline(f, check);
+		if (check == name)
+		{
+			gotoXY(47, 11);
+			cout << "FILE EXISTED, REWRITE THIS FILE ?" ;
+			gotoXY(47, 12);
+			cout << "ENTER TO ACCEPT...." ;
+			gotoXY(47, 13);
+			cout << "ESC TO DECLINE....." ;
+			char key = _getch();
+			if (key == 13)
+			{
+				w << name << endl;
+				cout << "SUCCESS";
+				Sleep(1000);
+				break;
+			}
+			else if (key == 27)
+			{
+				break;
+			}
+		}
+		if (f.eof())
+		{
+			gotoXY(47, 11);
+			w << name << endl;	
+			cout << "SUCCESS";
+			Sleep(1000);
+			break;
+		}
+	}
+	w.close();
+	ofstream fw("dataPlayer/" + name + ".txt");
+	fw << k1 << " " << k2 << " " << set << " " << turn << endl;
+	fw << p1 << " " << p2 << endl;
 	for (int i(5); i <= 49; i += 4)
 	{
 		for (int j(4); j <= 26; j += 2)
 		{
-			f << a[i][j] << " ";
+			fw << a[i][j] << " ";
 		}
-		f << endl;
+		fw << endl;
 	}
-	f.close();
+	fw.close();
+	system("cls");
 }
-
+void loadData(int data[60][60])
+{
+	for (int i(5); i <= 49; i += 4)
+	{
+		for (int j(4); j <= 26; j += 2)
+		{
+			a[i][j] = data[i][j];
+		}
+	}
+}
 void resetBoard()
 {
 	for (int i(5); i <= 49; i += 4)
@@ -699,28 +753,40 @@ void resetBoard()
 		}
 	}
 }
-void Init(int turn, string p1, string p2)
+void Init(int turn, string p1, string p2, int load)
 {
 	string first;
 	system("cls");
-	gotoXY(35, 9); cout << "0 %";
-	gotoXY(80, 9); cout << "100 %";
-	gotoXY(35, 10);
-	for (int i(1); i <= 25; i++)
+	if (load)
 	{
-		cout << char(219);
-		Sleep(10);
+		gotoXY(35, 9); cout << "0 %";
+		gotoXY(80, 9); cout << "100 %";
+		gotoXY(35, 10);
+		for (int i(1); i <= 25; i++)
+		{
+			cout << char(219);
+			Sleep(10);
+		}
+		for (int i(1); i <= 25; i++)
+		{
+			cout << char(219);
+			Sleep(100);
+		}
 	}
-	for (int i(1); i <= 25; i++)
-	{
-		cout << char(219);
-		Sleep(100);
-	}
-	
 	system("cls");
-	if (turn == 1) first = p1;
-	else if (turn == 2) first = p2;
-	gotoXY(46, 8); cout << first << " GO FIRST";
+	if (turn == 1)
+	{
+		first = p1;
+		Textcolor(Red);
+	}
+	else if (turn == 2)
+	{
+		first = p2;
+		Textcolor(Blue);
+	}
+	gotoXY(52, 7); 
+	cout << first << " GO FIRST";
+	Textcolor(White);
 	Sleep(1500);
 }
 void AnConTro()
@@ -736,5 +802,13 @@ void HienConTro()
 	Info.bVisible = TRUE;
 	Info.dwSize = 20;
 	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &Info);
+}
+void playAgain(int k1, int k2, int set, int color, int sound, int mode,string p1, string p2)
+{
+	int turn = initTurn();
+	Init(turn, p1, p2, 0);
+	DrawBoard(k1, k2, set, mode, p1, p2);
+	resetBoard();
+	Play(k1, k2, set, mode, turn, color, sound, p1, p2);
 }
 
