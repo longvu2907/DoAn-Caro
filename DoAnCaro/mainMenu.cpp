@@ -30,6 +30,7 @@ void Name(string& p1, string& p2)
 	cout << "NAME'S PLAYER 2: "; cin >> p2;
 	transform(p2.begin(), p2.end(), p2.begin(), ::toupper);
 }
+void PlayVsBot();
 
 void mainMenu()
 {
@@ -42,7 +43,14 @@ void mainMenu()
 	gotoXY(x, y);
 	while (1)
 	{
-		
+		Textcolor(DarkGreen);
+		gotoXY(50, 20);
+		cout << "W S: UP DOWN";
+		gotoXY(50, 21);
+		cout << "ENTER: SELECT";
+		gotoXY(50, 22);
+		cout << "TURN OFF UNIKEY, CAPSLOCK";
+		Textcolor(White);
 		if (y == 7)
 		{
 			Textcolor(color);
@@ -146,7 +154,11 @@ void mainMenu()
 				NewGame(k1, k2, set, mode);
 				break;
 			}
-			else if (y == 8||y == 9)
+			else if (y == 8)
+			{
+				PlayVsBot();
+			}
+			else if (y == 9)
 			{
 				LoadGame();
 			}
@@ -176,6 +188,32 @@ void NewGame(int k1, int k2 ,int set,int mode)
 	DrawBoard(k1, k2, set, mode, p1, p2);
 	resetBoard();
 	Play(k1, k2, set, mode, turn, color, sound, p1, p2);
+}
+
+void PlayVsBot()
+{
+	system("cls");
+	gotoXY(50, 10);
+	cout << "LOADING";
+	for (int i = 0; i < 5; i++)
+	{
+		gotoXY(57, 10);
+		for (int i = 0; i < 5; i++)
+		{
+			cout << ".";
+			Sleep(100);
+		}
+		gotoXY(57, 10);
+		for (int i = 0; i < 5; i++)
+		{
+			cout << " ";
+		}
+	}
+	system("cls");
+	gotoXY(50, 10);
+	cout << "TINH NANG DANG PHAT TRIEN";
+	Sleep(1000);
+	system("cls");
 }
 
 void LoadGame()

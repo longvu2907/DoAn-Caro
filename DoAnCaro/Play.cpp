@@ -4,14 +4,19 @@ int a[60][60] = {};
 
 void Savegame(int, int, int, int, std::string, std::string);
 void playAgain(int, int, int, int, int, int, std::string, std::string);
-
+void countTime()
+{
+	
+}
 void Play(int& k1, int& k2, int& set, int mode, int turn, int color, int sound, string p1, string p2)
 {
 	char k;
 	int value;
 	int x(5), y(4);
+	int time = 3000;
 	while (1)
 	{	
+
 		HienConTro(); 
 		gotoXY(5, 4); 
 		oTurn(x,y,turn,p1,p2);
@@ -141,6 +146,7 @@ void Play(int& k1, int& k2, int& set, int mode, int turn, int color, int sound, 
 				}
 				
 				set++;
+				AnConTro();
 				DrawBoard(k1, k2, set, mode, p1, p2);
 				resetBoard();
 				Play(k1, k2, set, mode, turn, color, sound, p1, p2);
@@ -213,7 +219,8 @@ void Play(int& k1, int& k2, int& set, int mode, int turn, int color, int sound, 
 							else if (y == 12) exit(0);
 						}
 					}
-				}			
+				}	
+				AnConTro();
 				set++;
 				DrawBoard(k1, k2, set, mode, p1, p2);
 				resetBoard();
@@ -395,6 +402,7 @@ void Play(int& k1, int& k2, int& set, int mode, int turn, int color, int sound, 
 		}
 	}
 }
+
 void tickXO(int x, int y, int& turn, int sound)
 {
 

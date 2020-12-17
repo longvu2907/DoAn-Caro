@@ -102,6 +102,73 @@ void DrawBoard(int k1, int k2, int set, int mode, string p1, string p2)
 			}
 		}
 	}
+	//print CARO
+	int x = 65, y =4;
+	Textcolor(Red);
+	//gotoXY(x, y);	  cout <<		"oooo";
+	//gotoXY(x, y + 1); cout <<	  "oooooo";
+	//gotoXY(x, y + 2); cout <<   "ooooooo";
+	//gotoXY(x, y + 3); cout <<  "oooo";
+	//gotoXY(x, y + 4); cout <<  "oooo";
+	//gotoXY(x, y + 5); cout << "oooooo";
+	//gotoXY(x, y + 6); cout << "ooooo";
+	//gotoXY(x, y + 7); cout << "ooooo";
+	//gotoXY(x, y + 8); cout << "ooooooooooo";
+
+	gotoXY(x, y);				  cout << "oooooo";
+	gotoXY(x - 3, y + 1);	   cout << "ooooooooo";
+	gotoXY(x - 5, y + 2);    cout << "ooooooooooo";
+	gotoXY(x - 6, y + 3);  cout << "oooooo";
+	gotoXY(x - 7, y + 4); cout << "oooooo";
+	gotoXY(x - 8, y + 5); cout << "oooooo";
+	gotoXY(x - 8, y + 6); cout << "oooooo";	
+	gotoXY(x - 8, y + 7); cout << "oooooo";
+	gotoXY(x - 7, y + 8); cout << "oooooo";
+	gotoXY(x - 6, y + 9);  cout << "oooooooooooo";
+	gotoXY(x - 5, y + 10);   cout << "ooooooooooo";
+	gotoXY(x - 3, y + 11);		cout << "ooooooooo";
+	gotoXY(x - 9 + 22, y );					cout << "ooooooo";
+	gotoXY(x - 9 + 22 - 2, y + 1);		  cout << "oooooooooo";
+	gotoXY(x - 9 + 22 - 3, y + 2);		 cout << "oooooooooooo";
+	gotoXY(x - 9 + 22 - 3, y + 3);		 cout << "oooooooooooo";
+	gotoXY(x - 9 + 22 - 3, y + 4);		 cout << "oooo    oooo";
+	gotoXY(x - 9 + 22 - 3, y + 5);		 cout << "oooo    oooo";
+	gotoXY(x - 9 + 22 - 3, y + 6);		 cout << "oooo    oooo";
+	gotoXY(x - 9 + 22 - 3, y + 7);		 cout << "oooooooooooo";
+	gotoXY(x - 9 + 22 - 3, y + 8);		 cout << "oooo    oooo";
+	gotoXY(x - 9 + 22 - 3, y + 9);		 cout << "oooo    oooo";
+	gotoXY(x - 9 + 22 - 3, y + 10);		 cout << "oooo    oooo";
+	gotoXY(x - 9 + 22 - 3, y + 11);		 cout << "oooo    oooo";
+	gotoXY(x + 26, y );			    cout << "ooo  oooo";
+	gotoXY(x + 26, y + 1);			cout << "oooooooooo";
+	gotoXY(x + 26, y + 2);			cout << "ooooooooooo";
+	gotoXY(x + 26, y + 3);			cout << "oooooooooooo";
+	gotoXY(x + 1 + 26, y + 4);		 cout << "oooo   oooo";
+	gotoXY(x + 1 + 26, y + 5);		 cout << "oooo   oooo";
+	gotoXY(x + 1 + 26, y + 6);		 cout << "oooo";
+	gotoXY(x + 1 + 26, y + 7);		 cout << "oooo";
+	gotoXY(x + 1 + 26, y + 8);		 cout << "oooo";
+	gotoXY(x + 1 + 26, y + 9);		 cout << "oooo";
+	gotoXY(x + 1 + 26, y + 10);	     cout << "oooo";
+	gotoXY(x + 1 + 26, y + 11);	     cout << "oooo";
+	gotoXY(x + 57 - 13, y);				   cout << "oooooo";
+	gotoXY(x + 57 - 15, y + 1);			 cout << "oooooooooo";
+	gotoXY(x + 57 - 16, y + 2);			 cout << "oooooooooooo";
+	gotoXY(x + 57 - 16, y + 3);			 cout << "oooooooooooo";
+	gotoXY(x + 57 - 16, y + 4);			 cout << "oooo    oooo";
+	gotoXY(x + 57 - 16, y + 5);			 cout << "oooo    oooo";
+	gotoXY(x + 57 - 16, y + 6);			 cout << "oooo    oooo";
+	gotoXY(x + 57 - 16, y + 7);			 cout << "oooo    oooo";
+	gotoXY(x + 57 - 16, y + 8);			 cout << "oooooooooooo";
+	gotoXY(x + 57 - 16, y + 9);			 cout << "oooooooooooo";
+	gotoXY(x + 57 - 15, y + 10);		 cout <<  "oooooooooo";
+	gotoXY(x + 57 - 13, y + 11);			cout << "oooooo";
+
+	Textcolor(DarkGreen);
+	gotoXY(x, y + 15); cout << "W A S D: MOVE";
+	gotoXY(x, y + 16); cout << "ENTER: TICK";
+	gotoXY(x, y + 17); cout << "ESC: PAUSE GAME";
+
 	gotoXY(30, 2);
 	Textcolor(Red);
 	cout << p1 << " ";
