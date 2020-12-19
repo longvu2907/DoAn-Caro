@@ -16,41 +16,14 @@ void Play(int& k1, int& k2, int& set, int mode, int turn, int color, int sound, 
 	int time = 3000;
 	while (1)
 	{	
-
+		PlaySound(NULL, 0, 0);
 		HienConTro(); 
 		gotoXY(5, 4); 
 		oTurn(x,y,turn,p1,p2);
-		k = _getch();
-		value = k;
-		if (value == -32 )
+		value = _getch();
+		if (value == 115 || value == 97 || value == 100 || value == 119)
 		{
-			value = _getch();
-			switch (value)
-			{
-			case 72:
-			case 119:
-				if (y > 4) y -= 2;
-				gotoXY(x, y);
-				break;
-			case 75:
-			case 97:
-				if (x > 5) x -= 4;
-				gotoXY(x, y);
-				break;
-			case 77:
-			case 100:
-				if (x < 49) x += 4;
-				gotoXY(x, y);
-				break;
-			case 80:
-			case 115:
-				if (y < 26) y += 2;
-				gotoXY(x, y);
-				break;
-			}
-		}
-		else if (value == 115 || value == 97 || value == 100 || value == 119)
-		{
+			if (sound == 1)  PlaySound(TEXT("Sound/move.wav"), NULL, SND_ASYNC);
 			switch (value)
 			{
 			case 119:
@@ -78,7 +51,6 @@ void Play(int& k1, int& k2, int& set, int mode, int turn, int color, int sound, 
 			if (checkXO(sound) == 1)
 			{
 				k1++;
-				FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
 				if (k1 == mode)
 				{
 					system("cls");
@@ -89,6 +61,7 @@ void Play(int& k1, int& k2, int& set, int mode, int turn, int color, int sound, 
 					Textcolor(White);
 					x = 47;
 					y = 10;
+					if (sound == 1)  PlaySound(TEXT("Sound/final.wav"), NULL, SND_ASYNC);
 					while (1)
 					{
 						if (y == 10)
@@ -120,16 +93,6 @@ void Play(int& k1, int& k2, int& set, int mode, int turn, int color, int sound, 
 						value = k;
 						switch (value)
 						{
-						case -32:
-							value = _getch();
-							if (value == 72)
-							{
-								if (y > 10) { y--; gotoXY(x, y); } break;
-							}
-							else if (value == 80)
-							{
-								if (y < 12) { y++; gotoXY(x, y); } break;
-							}
 							break;
 						case 119:
 							if (y > 10) { y--; gotoXY(x, y); }
@@ -138,6 +101,7 @@ void Play(int& k1, int& k2, int& set, int mode, int turn, int color, int sound, 
 								if (y < 12) { y++; gotoXY(x, y); } 
 							break;
 						case 13:
+							PlaySound(NULL, 0, 0);
 							if (y == 10) Start();
 							else if (y == 11) playAgain(0, 0, 1, color, sound, mode, p1, p2);
 							else if (y == 12) exit(0);
@@ -154,7 +118,6 @@ void Play(int& k1, int& k2, int& set, int mode, int turn, int color, int sound, 
 			else if (checkXO(sound) == 2)
 			{
 				k2++;
-				FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
 				if (k2 == mode)
 				{
 					system("cls");
@@ -165,6 +128,7 @@ void Play(int& k1, int& k2, int& set, int mode, int turn, int color, int sound, 
 					Textcolor(White);
 					x = 47;
 					y = 10;
+					if (sound == 1)  PlaySound(TEXT("Sound/final.wav"), NULL, SND_ASYNC);
 					while (1)
 					{
 						if (y == 10)
@@ -214,6 +178,7 @@ void Play(int& k1, int& k2, int& set, int mode, int turn, int color, int sound, 
 							if (y < 12) { y++; gotoXY(x, y); }
 							break;
 						case 13:
+							PlaySound(NULL, 0, 0);
 							if (y == 10) Start();
 							else if (y == 11) playAgain(0, 0, 1, color, sound, mode, p1, p2);
 							else if (y == 12) exit(0);
@@ -255,6 +220,7 @@ void Play(int& k1, int& k2, int& set, int mode, int turn, int color, int sound, 
 				Textcolor(White);
 				x = 47;
 				y = 10;
+				if (sound == 1)  PlaySound(TEXT("Sound/final.wav"), NULL, SND_ASYNC);
 				while (1)
 				{
 					if (y == 10)
@@ -304,6 +270,7 @@ void Play(int& k1, int& k2, int& set, int mode, int turn, int color, int sound, 
 						if (y < 12) { y++; gotoXY(x, y); }
 						break;
 					case 13:
+						PlaySound(NULL, 0, 0);
 						if (y == 10) Start();
 						else if (y == 11) playAgain(0, 0, 1, color, sound, mode, p1, p2);
 						else if (y == 12) exit(0);
@@ -318,6 +285,7 @@ void Play(int& k1, int& k2, int& set, int mode, int turn, int color, int sound, 
 		}
 		else if (value == 27)
 		{
+			if (sound == 1)  PlaySound(TEXT("Sound/nhacnen.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			AnConTro();
 			system("cls");
 			x = 47;
@@ -362,20 +330,7 @@ void Play(int& k1, int& k2, int& set, int mode, int turn, int color, int sound, 
 				}
 				k = _getch();
 				value = k;
-				if (value == -32)
-					{
-						value = _getch();
-						switch (value)
-						{
-						case 72:
-							if (y > 10) y--;
-							break;
-						case 80:
-							if (y < 13) y++;
-							break;	
-						}
-					}
-				else if (value == 115 || value == 97 || value == 100 || value == 119)
+				if (value == 115 || value == 97 || value == 100 || value == 119)
 				{
 					switch (value)
 					{
@@ -389,6 +344,7 @@ void Play(int& k1, int& k2, int& set, int mode, int turn, int color, int sound, 
 				}
 				else if (13)
 				{
+					PlaySound(NULL, NULL, SND_ASYNC);
 					if (y == 10) {	
 						DrawBoard(k1, k2, set, mode, p1 ,p2); 
 						Continue();
@@ -409,13 +365,13 @@ void tickXO(int x, int y, int& turn, int sound)
 	if (a[x][y] == 1 || a[x][y] == 2)
 	{
 		if (sound == 1) PlaySound(TEXT("Sound/error.wav"), NULL, SND_SYNC);
-		FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
+		
 		return;
 	}
 	else if (turn == 1)
 	{
 		if (sound == 1) PlaySound(TEXT("Sound/tickX.wav"), NULL, SND_SYNC);
-		FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
+		
 		a[x][y] = 1;
 		Textcolor(Red);
 		cout << "X";
@@ -424,7 +380,7 @@ void tickXO(int x, int y, int& turn, int sound)
 	else if (turn == 2)
 	{
 		if (sound == 1) PlaySound(TEXT("Sound/tickO.wav"), NULL, SND_SYNC);
-		FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
+		
 		a[x][y] = 2;
 		Textcolor(Blue);
 		cout << "O";
@@ -548,7 +504,7 @@ int checkXO(int sound)
 				if (a[i - 4][j] == 1 && a[i + 20][j] == 1) { check = 0; }
 				else
 				{
-					if (sound == 1) PlaySound(TEXT("win.wav"), NULL, SND_ASYNC);
+					if (sound == 1) PlaySound(TEXT("Sound/win.wav"), NULL, SND_ASYNC);
 					AnConTro();
 					for (int k(1); k <= 5; k++)
 					{
@@ -707,9 +663,9 @@ void Savegame(int k1, int k2, int set, int turn, string p1, string p2)
 			char key = _getch();
 			if (key == 13)
 			{
-				w << name << endl;
 				cout << "SUCCESS";
 				Sleep(1000);
+				FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
 				break;
 			}
 			else if (key == 27)
@@ -723,6 +679,7 @@ void Savegame(int k1, int k2, int set, int turn, string p1, string p2)
 			w << name << endl;	
 			cout << "SUCCESS";
 			Sleep(1000);
+			FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
 			break;
 		}
 	}

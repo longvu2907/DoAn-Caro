@@ -24,10 +24,10 @@ void Name(string& p1, string& p2)
 {
 	system("cls");
 	gotoXY(40, 7);
-	cout << "NAME'S PLAYER 1: "; cin >> p1;
+	cout << "NAME'S PLAYER 1: "; getline(cin, p1);
 	transform(p1.begin(), p1.end(), p1.begin(), ::toupper);
 	gotoXY(40, 9);
-	cout << "NAME'S PLAYER 2: "; cin >> p2;
+	cout << "NAME'S PLAYER 2: "; getline(cin, p2);
 	transform(p2.begin(), p2.end(), p2.begin(), ::toupper);
 }
 void PlayVsBot();
@@ -36,7 +36,7 @@ void mainMenu()
 {
 	system("cls");
 	readSetting(color, sound, mode);
-	if (sound == 1)  PlaySound(TEXT("Sound/nhacnen.wav"), NULL, SND_ASYNC | SND_LOOP);
+	if (sound == 1)  PlaySound(TEXT("Sound/nhacnen.wav"), NULL, SND_ASYNC );
 	else;
 	int x(51), y(7);
 	AnConTro();	
@@ -127,22 +127,15 @@ void mainMenu()
 		switch (value)
 		{
 		case 119:
-			if (y > 7) { y--; gotoXY(x, y); }
+			if (y > 7) 
+			{
+				y--; gotoXY(x, y); 
+			}
 			break;
 		case 115:
-			if (y < 12) { y++; gotoXY(x, y); }
-			break;
-		case -32:
-			value = _getch();
-			if (value == 72)
+			if (y < 12) 
 			{
-				if (y > 7) { y--; gotoXY(x, y); } 
-				break;
-			}
-			else if (value == 80)
-			{
-				if (y < 12) { y++; gotoXY(x, y); } 
-				break;
+				y++; gotoXY(x, y); 
 			}
 			break;
 		case 13:
@@ -214,6 +207,7 @@ void PlayVsBot()
 	cout << "TINH NANG DANG PHAT TRIEN";
 	Sleep(1000);
 	system("cls");
+	mainMenu();
 }
 
 void LoadGame()
@@ -235,37 +229,50 @@ void LoadGame()
 	while (true)
 	{
 		system("cls");
-		for (int i = 0; i < n; i++)
+		if (listName[0] == "")
 		{
-			gotoXY(52, i + 10);
-			cout << listName[i];
+			gotoXY(52, 10);
+			cout << "NO DATA";
+			gotoXY(52, 21);
+			cout << "ESC: BACK";
 		}
-		gotoXY(50, cmd);
-		cout << "->";
-		char key = _getch();
-		if (key == 'w' || key == 'W')
+		else
 		{
-			if (cmd > 10)
+			for (int i = 0; i < n; i++)
 			{
-				cmd--;
+				gotoXY(52, i + 10);
+				cout << listName[i];
 			}
+			gotoXY(52, 21);
+			cout << "ESC: BACK";
+			gotoXY(50, cmd);
+			cout << "->";
 		}
-		else if (key == 's' || key == 'S')
-		{
-			if (cmd < n + 9)
+			char key = _getch();
+			if (key == 'w' || key == 'W')
 			{
-				cmd++;
+				if (cmd > 10)
+				{
+					cmd--;
+				}
 			}
-		}
-		else if (key == 13)
-		{
-			choice = cmd-10;
-			break;
-		}
-		else if (key == 27)
-		{
-			mainMenu();
-		}
+			else if (key == 's' || key == 'S')
+			{
+				if (cmd < n + 9)
+				{
+					cmd++;
+				}
+			}
+			else if (key == 13)
+			{
+				choice = cmd - 10;
+				break;
+			}
+			else if (key == 27)
+			{
+				mainMenu();
+			}
+		
 	}
 	f.close();
 	ifstream fRead("dataPlayer/" + listName[choice] + ".txt");
